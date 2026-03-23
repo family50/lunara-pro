@@ -1,0 +1,555 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+:root {
+
+  
+
+  --transition-luxury: all 1s cubic-bezier(0.25, 1, 0.5, 1); /* تنعيم إضافي للانتقالات */
+}
+
+.collections-container {
+  background-color: var(--bg-cream);
+  padding: 0px 4% 150px;
+  min-height: 100vh;
+  /* إضافة ملمس خفيف جداً للخلفية */
+  background-image: radial-gradient(var(--secondary-cream) 0.5px, transparent 0.5px);
+  background-size: 40px 40px;
+}
+
+/* Header Section - لم يتم تغيير أي شيء حسب طلبك */
+.collections-header {
+  text-align: center;
+  margin-bottom: 100px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.collections-header h1 {
+  font-family: var(--font-primary);
+  font-size: 4rem;
+  font-weight: 400;
+  letter-spacing: -1px;
+  text-transform: capitalize;
+  margin-bottom: 25px;
+  color: var(--text-main);
+}
+
+.collections-header p {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary-gold);
+  line-height: 1.8;
+}
+
+/* --- Grid Layout المطور للتوازن الكامل --- */
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 35px; 
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* --- Base Card Style --- */
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-luxury);
+  background-color: var(--secondary-cream);
+  border-radius: 12px; /* حواف ناعمة جداً للفخامة */
+}
+
+/* --- إعادة توزيع الأماكن ليكونوا بجانب بعضهم --- */
+
+/* الصف الأول: صورتين بجانب بعض */
+.card-hair { grid-column: span 7; }
+.card-face { grid-column: span 5; }
+
+/* الصف الثاني: صورة واحدة عريضة في المنتصف */
+.card-body { 
+  grid-column: span 12; 
+  height: 450px; /* أقصر قليلاً لكسر الملل البصري */
+}
+
+/* الصف الثالث: آخر صورتين بجانب بعض ليتوازنوا مع الصف الأول */
+.card-natural { grid-column: span 5; }
+.card-gift { grid-column: span 7; }
+
+/* --- تصميم الصور والنصوص --- */
+.card-image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-luxury);
+  filter: sepia(15%) contrast(105%) brightness(0.9); /* فلتر كريمي دافئ */
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  /* تدرج لوني يعتمد على درجات البني الترابية الدافئة */
+  background: linear-gradient(to top, rgba(67, 61, 53, 0.85) 0%, transparent 60%);
+  transition: var(--transition-luxury);
+  padding: 50px;
+  text-align: left;
+}
+
+.card-overlay h2 {
+  font-family: var(--font-primary);
+  color: var(--bg-cream); /* لون كريمي للنص بدلاً من الأبيض الصارخ */
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+  transform: translateY(15px);
+  transition: var(--transition-luxury);
+}
+
+.card-overlay span {
+  font-family: var(--font-secondary);
+  color: var(--bg-cream);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 1.6;
+  max-width: 85%;
+  opacity: 0.85;
+  transform: translateY(25px);
+  transition: var(--transition-luxury);
+}
+
+.explore-btn {
+    margin-top: 25px;
+    color: var(--primary-gold);
+    font-family: var(--font-secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-bottom: 1.5px solid var(--primary-gold);
+    padding-bottom: 6px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--transition-luxury);
+}
+
+/* --- انميشن الهوفر الناعم جداً --- */
+.collection-card:hover {
+  transform: translateY(-8px); /* رفعة بسيطة للكارت */
+  box-shadow: 0 30px 60px rgba(98, 77, 63, 0.15); /* ظل ترابي ناعم */
+}
+
+.collection-card:hover .card-image-wrapper img {
+  transform: scale(1.1); /* زووم ناعم جداً */
+  filter: sepia(0%) brightness(0.75);
+}
+
+.collection-card:hover .card-overlay {
+  background: linear-gradient(to top, rgba(67, 61, 53, 0.95) 0%, transparent 75%);
+}
+
+.collection-card:hover h2, 
+.collection-card:hover span,
+.collection-card:hover .explore-btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --- Grid Layout الجديد (Mirror Symmetry) --- */
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 35px; 
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+
+
+
+
+/* --- إعادة توزيع الأماكن بدقة --- */
+
+/* الصف الأول: يسار كبير (8) - يمين صغير (4) */
+.card-hair { 
+  grid-column: span 8; 
+}
+
+ .card-body{ 
+  grid-column: span 4; 
+}
+
+/* الصف الثاني: عكس الأول -> يسار صغير (4) - يمين كبير (8) */
+.card-face  { 
+  grid-column: span 4; 
+  height: 400px; /* توحيد الطول مع اللي بجانبها */
+}
+ .card-gift{ 
+  grid-column: span 8; 
+  height: 400px; 
+}
+
+/* الصف الثالث: الهدايا تأخذ كامل العرض لإغلاق السيكشن بقوة */
+.card-natural  { 
+  grid-column: span 12; 
+height: 450px; 
+  margin-top: 10px;
+}
+
+/* --- تعديل بسيط لضمان فخامة النصوص مع الأحجام الجديدة --- */
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-luxury);
+  background-color: var(--secondary-cream);
+  border-radius: 12px;
+}
+
+.card-overlay h2 {
+  font-family: var(--font-primary);
+  /* استخدام clamp لجعل الخط يتناسب مع مساحة الكارت سواء كان كبير أو صغير */
+  font-size: clamp(2rem, 4vw, 3.2rem); 
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+  transform: translateY(15px);
+  transition: var(--transition-luxury);
+}
+
+.card-overlay span {
+  font-family: var(--font-secondary);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  line-height: 1.6;
+  max-width: 80%;
+  opacity: 0.9;
+  transform: translateY(25px);
+  transition: var(--transition-luxury);
+}
+
+
+
+/* --- Optimization for 1300px and below --- */
+@media (max-width: 1300px) {
+  .collections-container {
+    padding: 0px 3% 100px;
+  }
+
+  .collections-grid {
+    gap: 20px; /* تضييق المسافات للحفاظ على التوازن */
+  }
+
+  .collection-card {
+    height: 500px; /* تقليل الارتفاع ليتناسب مع عرض الشاشة الأصغر */
+  }
+
+  .card-face, .card-gift, .card-natural {
+    height: 400px;
+  }
+
+  .card-overlay {
+    padding: 30px;
+  }
+
+  .card-overlay h2 {
+    font-size: 2.2rem;
+  }
+  /* الصف الثاني: عكس الأول -> يسار (5) - يمين (7) */
+.card-face { 
+  grid-column: span 5; 
+
+}
+.card-gift { 
+  grid-column: span 7; 
+
+}
+
+/* الصف الثالث: كما هو عرض كامل */
+.card-natural { 
+  grid-column: span 12; 
+
+  margin-top: 10px;
+}
+.card-hair { 
+  grid-column: span 7; 
+}
+.card-body { 
+  grid-column: span 5; 
+}
+
+}
+
+/* --- Optimization for 1025px and below --- */
+@media (max-width: 1025px) {
+  .collections-container {
+    padding: 0px 3% 80px;
+  }
+  .collections-header h1 {
+ 
+  font-size: 3.5rem;
+  }
+
+  .collections-grid {
+    gap: 15px; /* تقليل المسافة بين الكروت لتوفير مساحة */
+  }
+
+  /* تقليل الارتفاع الكلي للكروت */
+  .collection-card {
+    height: 450px; 
+  }
+
+  /* ضبط ارتفاع الكروت في الصفوف السفلية */
+  .card-face, 
+  .card-gift, 
+  .card-natural {
+    height: 350px;
+  }
+
+  /* تصغير حجم العناوين لضمان عدم خروجها عن الكادر */
+  .card-overlay {
+    padding: 25px;
+  }
+
+  .card-overlay h2 {
+    font-size: 1.8rem;
+    letter-spacing: 0px;
+    margin-bottom: 8px;
+  }
+
+  .card-overlay span {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    max-width: 95%;
+  }
+
+  .explore-btn {
+    margin-top: 15px;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+  }
+  /* --- التوزيع الجديد المتوازن (7-5 بدل 8-4) --- */
+
+/* الصف الأول: يسار (7) - يمين (5) */
+.card-hair { 
+  grid-column: span 7; 
+}
+.card-body { 
+  grid-column: span 5; 
+}
+
+/* الصف الثاني: عكس الأول -> يسار (5) - يمين (7) */
+.card-face { 
+  grid-column: span 5; 
+  height: 400px; 
+}
+.card-gift { 
+  grid-column: span 7; 
+  height: 400px; 
+}
+
+/* الصف الثالث: كما هو عرض كامل */
+.card-natural { 
+  grid-column: span 12; 
+  height: 450px; 
+  margin-top: 10px;
+}
+  
+}
+/* --- Mobile & Tablet Portrait (850px and below) --- */
+@media (max-width: 850px) {
+  .collections-container {
+    padding: 0px 5% 80px; /* زيادة الهوامش الجانبية قليلاً */
+  }
+
+  .collections-header {
+    margin-bottom: 50px;
+  }
+
+  .collections-header h1 {
+    font-size: 2.8rem; /* تصغير العنوان الأساسي ليناسب الموبايل */
+  }
+
+  .collections-grid {
+    display: flex; /* تحويل الـ Grid إلى Flex لترتيب أسهل تحت بعضها */
+    flex-direction: column;
+    gap: 25px; 
+  }
+
+  .collection-card {
+    grid-column: span 12 !important; /* إجبار جميع الكروت على أخذ العرض الكامل */
+    height: 400px !important; /* ارتفاع موحد وسينمائي */
+  }
+
+  /* إلغاء الارتفاعات المخصصة السابقة لتوحيد الشكل */
+  .card-hair, .card-body, .card-face, .card-gift, .card-natural {
+    height: 400px !important;
+    margin-top: 0 !important;
+  }
+
+  .card-overlay {
+    padding: 30px;
+    /* جعل التدرج يبدأ من المنتصف لضمان وضوح النص على الموبايل */
+    background: linear-gradient(to top, rgba(67, 61, 53, 0.8) 0%, transparent 70%);
+   
+}
+
+
+
+
+  .card-overlay h2 {
+    font-size: 2rem; /* حجم مريح للعين على شاشات الموبايل */
+    transform: translateY(-7px);
+  }
+
+  .card-overlay span {
+    font-size: 0.85rem;
+    max-width: 100%; /* السماح للنص بأخذ المساحة كاملة */
+     
+  }
+
+  /* إظهار زر الاستكشاف دائماً على الموبايل لأن الهوفر غير موجود */
+  .explore-btn {
+display: none;
+  }
+}
+
+
+
+/* --- Ultra Mobile Optimization (450px and below) --- */
+@media (max-width: 450px) {
+  .collections-container {
+    padding: 0px 6% 60px; /* تقليل البادينج قليلاً لزيادة مساحة الصورة */
+  margin-bottom: 20px;
+}
+
+  .collections-header {
+    margin-bottom: 40px;
+    padding: 0 10px;
+  }
+
+  .collections-header h1 {
+    font-size: 2.6rem; /* تصغير العنوان ليتناسب مع عرض الموبايل الصغير */
+    line-height: 1.2;
+  }
+
+  .collections-header p {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .collections-grid {
+    gap: 20px; /* تقليل المسافة بين الكروت لزيادة الانسيابية */
+  }
+
+  .collection-card {
+    height: 320px !important; /* ارتفاع مريح يسمح برؤية الكارت التالي جزئياً */
+    border-radius: 8px; /* حواف أنعم قليلاً للمقاس الصغير */
+  }
+
+  /* توحيد الارتفاع لجميع الكروت */
+  .card-hair, .card-body, .card-face, .card-gift, .card-natural {
+    height: 320px !important;
+  }
+
+  .card-overlay {
+    padding: 20px; /* تقليل المسافات الداخلية للنصوص */
+    /* تدرج لوني أقوى قليلاً لضمان وضوح النص فوق الصور الصغيرة */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 80%);
+  }
+
+  .card-overlay h2 {
+    font-size: 1.6rem; /* حجم خط واضح وغير ضخم */
+    margin-bottom: 6px;
+    transform: translateY(0); /* إلغاء حركة الـ Translate لثبات النص */
+  }
+
+  .card-overlay span {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    opacity: 1; /* جعل النص واضحاً تماماً */
+    transform: translateY(0);
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* إظهار سطرين فقط من الوصف لمنع الزحام */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+
+
+
+/* --- Ultra-Narrow Mobile (350px and below) --- */
+@media (max-width: 350px) {
+  .collections-container {
+    padding: 0px 4% 40px; /* تقليل الهوامش الجانبية لأقصى حد لتوسيع مساحة الرؤية */
+  }
+
+  .collections-header {
+    margin-bottom: 30px;
+  }
+
+  .collections-header h1 {
+    font-size: 1.8rem; /* تصغير العنوان الأساسي لمنع انكسار الكلمات الطويلة */
+    letter-spacing: -0.5px;
+  }
+
+  .collections-header p {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+
+  .collections-grid {
+    gap: 15px; /* تضييق المسافة بين الكروت لتوفير مساحة طولية */
+  }
+
+  .collection-card {
+    height: 280px !important; /* تقليل الارتفاع ليتناسب مع ضيق العرض */
+  }
+
+  /* توحيد الارتفاع للمقاس الصغير جداً */
+  .card-hair, .card-body, .card-face, .card-gift, .card-natural {
+    height: 280px !important;
+  }
+
+  .card-overlay {
+    padding: 15px; /* تقليل المسافة الداخلية للنص */
+  }
+
+  .card-overlay h2 {
+    font-size: 1.4rem; /* حجم متناسب مع الـ 280px */
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+
+  .card-overlay span {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    max-width: 100%;
+    /* تقليل عدد الأسطر لسطر واحد فقط لو لزم الأمر لترك مساحة للصورة */
+    -webkit-line-clamp: 2; 
+  }
+}

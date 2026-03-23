@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+:root {
+  /* Colors */
+  --bg-cream: #F9F5F0;          /* الخلفية الكريمي الملكي */
+  --secondary-cream: #F1EAE0;   /* خلفية ثانوية للأقسام */
+  --primary-gold: #8C6D39;      /* الذهبي الملكي المطفي */
+  --text-main: #624d3f;         /* لون النص الأساسي */
+  --text-muted: #6B5E55;        /* نصوص فرعية هادئة */
+  
+  /* Typography Variables */
+  --font-primary: 'Playfair Display', serif; /* للعناوين والفخامة */
+  --font-secondary: 'Montserrat', sans-serif; /* للنصوص الطويلة والشروحات */
+  
+  /* Transitions */
+
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-secondary); /* الخط الأساسي للجسم */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+
+h1, h2, h3, .vault-title, .vault-category {
+  font-family: var(--font-primary); /* تطبيق خط الفخامة على العناوين */
+}
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-secondary); /* الخط الأساسي للجسم */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* --- Luxury Scrollbar Styling --- */
+
+/* 1. تنسيق الشريط للمتصفحات (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px; /* شريط نحيف جداً وأنيق */
+  background-color: var(--bg-cream); /* يندمج مع لون خلفية الموقع */
+}
+
+/* 2. مسار الشريط (Track) */
+::-webkit-scrollbar-track {
+  background-color: var(--bg-cream);
+  border-left: 1px solid var(--secondary-cream); /* خط رفيع جداً للفصل */
+}
+
+/* 3. الجزء المتحرك (Thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: var(--text-muted); /* لون بني ترابي هادئ في الحالة العادية */
+  border-radius: 100px; /* حواف دائرية تماماً */
+  border: 2px solid var(--bg-cream); /* مساحة بيضاء حول الشريط لجعله يبدو "عائماً" */
+
+}
+
+/* 4. عند تمرير الماوس فوق الشريط (Hover) */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-gold); /* يتحول للذهبي الملكي عند اللمس */
+}
+
+/* 5. تنسيق الشريط لمتصفح Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) var(--bg-cream);
+}
+

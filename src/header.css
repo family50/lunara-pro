@@ -1,0 +1,349 @@
+/* header.css - The Ultimate Luxury Edition for Lunara Pro */
+
+/* 1. التنسيق الأساسي للهيدر (الديسكتوب) */
+
+
+/* الحالة الابتدائية: طويل، شفاف، وزجاجي */
+/* --- 1. التنسيق الأساسي للهيدر (Base Container) --- */
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  box-sizing: border-box;
+  z-index: 1000;
+  
+  /* حذفنا الـ height من هنا نهائياً */
+  
+  /* انتقال ناعم جداً لكل الخصائص */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* --- الحالة الابتدائية (عند فتح الصفحة / أعلى الصفحة) --- */
+.header-initial {
+  height: 120px; /* جعلناه أطول ليعطي فخامة عند البداية */
+  background: rgba(249, 245, 240, 0.01); /* شفاف جداً */
+  backdrop-filter: blur(5px); /* بلور خفيف جداً */
+  -webkit-backdrop-filter: blur(5px);
+  border-bottom: 1px solid rgba(140, 109, 57, 0.05); /* خط غير مرئي تقريباً */
+  box-shadow: none;
+}
+
+/* --- الحالة عند السكرول (بعد التحرك لأسفل) --- */
+.header-scrolled {
+  height: 75px; /* الحجم المثالي للتبحر */
+  background: rgba(249, 245, 240, 0.85); /* كريمي زجاجي أوضح */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(140, 109, 57, 0.15);
+  box-shadow: 0 10px 30px rgba(45, 36, 30, 0.05);
+}
+
+.logo-img {
+  height: 40px;
+  transition: transform 0.5s ease;
+}
+
+.header-scrolled .logo-img {
+  transform: scale(0.9); /* تصغير اللوجو قليلاً عند السكرول */
+}
+
+/* تأكد من إضافة padding-top للبودي أو الماين لتعويض الهيدر الـ fixed */
+body {
+  padding-top: 0; /* لأن الهيدر في البداية شفاف، نريد المحتوى يظهر خلفه */
+}
+/* 2. قسم اللوجو (اليسار) */
+.left-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo-img {
+  height: 60px; 
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: var(--transition-luxury);
+  margin-top: 5px; 
+}
+
+.logo-img:hover {
+  transform: scale(1.03); 
+}
+
+.logo-text {
+  display: block; 
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 2px;
+  margin: 0;
+  margin-left: 15px; 
+  text-transform: capitalize; 
+  transition: var(--transition-luxury);
+  cursor: pointer;
+}
+
+.logo-text:hover {
+  letter-spacing: 4px;
+  opacity: 0.9;
+}
+
+/* 3. روابط الملاحة للديسكتوب (اليمين) */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  transition: var(--transition-luxury);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -5px;
+  left: 50%;
+  background-color: var(--primary-gold);
+  transition: var(--transition-luxury);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: var(--primary-gold);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ستايل أيقونة العربة في الديسكتوب */
+.cart-link {
+  font-weight: 600;
+}
+
+.cart-link i {
+  font-size: 1.1rem;
+  color: var(--primary-gold);
+  transition: var(--transition-luxury);
+}
+
+.nav-link:hover i {
+  transform: translateY(-2px);
+}
+
+/* 4. بار الموبايل السفلي (مخفي افتراضياً) */
+.mobile-bottom-nav {
+  display: none;
+}
+/* --- تعديل روابط الديسكتوب --- */
+.nav-link.active {
+  color: var(--primary-gold);
+}
+
+.nav-link.active::after {
+  width: 100%; /* الخط يظل ممدداً في الصفحة النشطة */
+}
+
+/* ------------------------------------------------ */
+/* 5. التجاوب مع الشاشات المتوسطة (1150px) */
+/* ------------------------------------------------ */
+@media (max-width: 1150px) {
+  .header-container {
+    height: 75px;
+    padding: 0 4%;
+  }
+
+  .logo-img {
+    height: 45px;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+    margin-left: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .desktop-nav {
+    gap: 25px;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+  }
+
+  .cart-link i {
+    font-size: 1rem;
+  }
+}
+
+/* ------------------------------------------------ */
+/* 6. التجاوب مع شاشات الموبايل والتابلت (850px) */
+/* ------------------------------------------------ */
+@media (max-width: 850px) {
+  /* إخفاء نافذة الديسكتوب العلوية */
+  .desktop-nav {
+    display: none;
+  }
+
+  .header-container {
+
+    height: 75px;
+  }
+
+.mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* تقليل الارتفاع من 75px إلى 60px ليصبح أنحف */
+    height: 60px; 
+    background: rgba(249, 245, 240, 0.92); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(197, 160, 89, 0.15);
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2000;
+    /* تقليل البادنج السفلي */
+    padding-bottom: 5px; 
+    box-shadow: 0 -5px 20px rgba(45, 36, 30, 0.05);
+  }
+
+  .mobile-nav-item {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* تقليل المسافة بين الأيقونة والنص */
+    gap: 2px; 
+    color: var(--text-muted);
+    transition: var(--transition-luxury);
+  }
+
+  .mobile-nav-item i {
+    /* تصغير الأيقونة قليلاً لتناسب الارتفاع الجديد */
+    font-size: 1.1rem; 
+    color: var(--primary-gold);
+  }
+
+  .mobile-nav-item span {
+    font-family: 'Playfair Display', serif;
+    /* تصغير الخط قليلاً */
+    font-size: 0.8rem; 
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+ /* --- إضافة الخط الذهبي تحت أيقونات الموبايل عند التحويم --- */
+
+.mobile-nav-item {
+  position: relative; /* ضروري لتموضع الخط بالنسبة للعنصر */
+  padding-bottom: 4px; /* مساحة بسيطة لظهور الخط */
+}
+
+.mobile-nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* يظهر تحت النص مباشرة */
+  left: 50%;
+  width: 0; /* يبدأ بعرض صفر */
+  height: 1.5px; /* خط نحيف جداً وفخم */
+  background: var(--primary-gold);
+  transition: var(--transition-luxury);
+  transform: translateX(-50%);
+  border-radius: 10px; /* أطراف دائرية ناعمة للخط */
+  box-shadow: 0 0 8px rgba(197, 160, 89, 0.4); /* توهج ذهبي خفيف للخط */
+}
+
+.mobile-nav-item:hover::after {
+  width: 60%; /* الخط يتمدد ليغطي 60% من عرض العنصر فقط للرقي */
+}
+
+.mobile-nav-item:hover {
+  transform: translateY(-4px); /* زيادة حركة الصعود قليلاً لترك مساحة للخط */
+  color: var(--text-main);
+}
+/* حالة الصفحة النشطة في بار الموبايل */
+  .mobile-nav-item.active {
+    color: var(--text-main);
+    transform: translateY(-4px); /* تظل صاعدة قليلاً لتمييزها */
+  }
+
+  .mobile-nav-item.active::after {
+    width: 60%; /* الخط الذهبي يظل ظاهراً تحت الصفحة النشطة */
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.6); /* توهج أقوى للنشط */
+  }
+
+  .mobile-nav-item.active i {
+    color: var(--primary-gold);
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.3));
+  }
+
+}
+/* ------------------------------------------------ */
+/* 7. التجاوب مع شاشات الموبايل الصغيرة جداً (430px) */
+/* ------------------------------------------------ */
+@media (max-width: 430px) {
+  /* تصغير الهيدر العلوي */
+  .header-container {
+    height: 62px; /* تصغير من 70px */
+    padding: 0 4%;
+  }
+
+  .logo-img {
+    height: 36px; /* تصغير من 40px */
+  }
+
+  .logo-text {
+    font-size: 1.15rem; /* تصغير من 1.3rem */
+    letter-spacing: 0.8px;
+  }
+
+  /* تصغير البار السفلي (Bottom Nav) */
+  .mobile-bottom-nav {
+    height: 52px; /* تصغير من 60px بنسبة 13% تقريباً */
+    padding-bottom: 2px;
+  }
+
+  .mobile-nav-item {
+    gap: 1px; /* تقريب شديد بين الأيقونة والنص */
+  }
+
+  .mobile-nav-item i {
+    font-size: 0.95rem; /* تصغير من 1.1rem */
+  }
+
+  .mobile-nav-item span {
+    font-size: 0.52rem; /* تصغير من 0.6rem لضمان عدم انكسار السطر */
+    letter-spacing: 0.2px;
+  }
+
+  /* تقليل حركة الـ Hover لتناسب لمسات الإصبع السريعة */
+  .mobile-nav-item:hover {
+    transform: translateY(-1px);
+  }
+}

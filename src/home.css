@@ -1,0 +1,788 @@
+.home-page {
+  /* تغيير الـ position ليصبح الحاوي "سلطة مطلقة" على الشاشة */
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  width: 100%;
+  /* تأكد من أن الارتفاع الأدنى يغطي الشاشة */
+  min-height: 100vh; 
+  
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  
+  /* تصفير إجباري */
+  margin: 0 !important;
+  padding: 0 !important;
+  
+  /* منع أي مشاكل عرضية */
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+/* --- 1. Hero Section (Creamy Light & Watermark Mask) --- */
+/* --- 1. Hero Section (No Scroll & Deep Luxury Cream) --- */
+/* --- 1. Hero Section (Strict No-Scroll) --- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  /* إضافة تأكيد للطول لمنع أي تمدد */
+ 
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* هذا السطر هو المسؤول عن إخفاء المسطرة */
+  overflow: hidden; 
+  background-color: #E6DED3;
+  /* تصفير أي إزاحة قد تأتي من العناصر الأب */
+  margin: 0;
+  padding: 0;
+ 
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  /* وضع الفيديو في المنتصف تماماً وتغطية المساحة */
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0.7;
+  filter: brightness(0.85) contrast(1.1) sepia(35%);
+  /* منع الفيديو من استقبال أي أحداث ماوس قد تسبب سكرول */
+  pointer-events: none; 
+   
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* التدرج الكريمي مع زيادة كثافة القاع لإخفاء العلامة المائية */
+  background: linear-gradient(
+    to bottom, 
+    rgba(230, 222, 211, 0.2) 0%,   
+    transparent 45%,               
+    rgba(249, 245, 240, 0.9) 80%,  /* تقوية الشادو قليلاً */
+    rgba(249, 245, 240, 1) 100%    
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+ 
+/* --- THE Majestic TYPOGRAPHY --- */
+.hero-content {
+  position: relative;
+  z-index: 5; /* فوق الأشكال الجرافيكية والشادو */
+  text-align: center;
+  max-width: 1200px;
+  padding: 0 5%;
+  /* ظل نص ناعم جداً وفخم للوضوح */
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+}
+
+.hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 6px; /* زيادة المسافة بين الحروف */
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  display: block;
+  font-weight: 500;
+  /* لون ذهبي مطفي فخم */
+  color: var(--primary-gold); 
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 9vw, 6rem); /* حجم متوازن */
+  font-weight: 700;
+  line-height: 1.1; /* ارتفاع سطر متوازن */
+  margin-bottom: 35px;
+  /* لون أسود فخم مائل للبني */
+  color: var(--text-main); 
+}
+
+.hero-title span {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; /* خط مائل للجملة المميزة */
+  font-weight: 400; /* أنحف لإظهار التباين */
+  color: var(--primary-gold); 
+}
+
+/* وصف فرعي */
+.hero-description {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 750px;
+  margin: 0 auto;
+  color: var(--primary-gold); /* لون هادئ وباهت */
+  letter-spacing: 0.5px;
+}
+
+/* --- THE Majestic GRAPHIC ELEMENTS (NEW) --- */
+
+/* 1. خطوط التحميل الجانبية (Side Lines) */
+/* 1. خطوط جانبية متوازنة (The Golden Mean - 30% More Visible) */
+.hero-side-line {
+  position: absolute;
+  /* زيادة الطول بنسبة بسيطة (بدلاً من 25% جعلناها 20%) */
+  top: 20%; 
+  bottom: 20%;
+  width: 1px;
+  
+  /* تقوية التدرج اللوني في المنتصف */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(197, 160, 89, 0.2) 20%,
+    rgba(197, 160, 89, 0.6) 50%, /* كانت 0.4 وأصبحت 0.6 للوضوح */
+    rgba(197, 160, 89, 0.2) 80%,
+    transparent 100%
+  );
+  
+  /* زيادة التوهج بنسبة بسيطة */
+  box-shadow: 0 0 8px rgba(197, 160, 89, 0.25);
+  
+  /* رفع الوضوح العام من 0.6 إلى 0.8 */
+  opacity: 0.8; 
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* التوهج المحيطي (أوضح بنسبة بسيطة) */
+.hero-side-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px; /* كانت 4px */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(197, 160, 89, 0.25), /* زيادة تركيز الضوء */
+    transparent
+  );
+  filter: blur(3px);
+}
+
+/* النقطة المتحركة (أوضح قليلاً لتعطي حياة للخط) */
+.hero-side-line::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 18%; /* زيادة طول اللمعة قليلاً */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.5), /* كانت 0.3 أصبحت 0.5 */
+    transparent
+  );
+  opacity: 0.5;
+  animation: scan-line 5s linear infinite; /* تسريع بسيط لتكون ملحوظة (5 ثواني) */
+}
+
+@keyframes scan-line {
+  0% { top: -20%; }
+  100% { top: 120%; }
+}
+
+.line-left {
+  left: 3.5%; /* تقريب بسيط للحافة لزيادة التأطير */
+}
+
+.line-right {
+  right: 3.5%;
+}
+/* 2. الأشكال الهندسية الطافية (Geometric Floating Shapes) */
+.hero-geometric-shape {
+  position: absolute;
+  /* تأثير الزجاج المشتت (Glassmorphism) */
+  background: rgba(249, 245, 240, 0.01); /* شفاف جداً */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  
+  /* تحديد ذهبي رفيع جداً وفخم */
+  border: 1px solid rgba(140, 109, 57, 0.08); 
+  
+  opacity: 0.8; /* شفافية العناصر نفسها */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); 
+  
+  pointer-events: none;
+  z-index: 4; /* فوق خطوط التحميل الجانبية */
+}
+
+/* شكل معين صغير بالأعلى لليسار */
+.shape-diamond-1 {
+  width: 120px;
+  height: 120px;
+  top: 25%;
+  left: 12%;
+  transform: rotate(45deg); /* تدوير المعين */
+  border-radius: 4px; /* حواف دائرية خفيفة */
+}
+
+/* شكل دائرة مجوفة في الوسط لليمين */
+.shape-circle-1 {
+  width: 180px;
+  height: 180px;
+  top: 55%;
+  right: 15%;
+  border-radius: 50%; /* شكل الدائرة */
+  background: transparent; /* جعل الدائرة مجوفة */
+  border-width: 2px; /* خط أكثر سمكاً للدائرة */
+}
+
+/* شكل مثلث كبير بالأسفل لليسار */
+.shape-triangle-1 {
+  width: 250px;
+  height: 250px;
+  bottom: 20%;
+  left: 18%;
+  background: transparent; /* جعل المثلث مجوفاً */
+  
+  /* تأثير المثلث باستخدام الحدود (Triangle Trick) */
+  border-width: 125px; /* نصف العرض */
+  border-style: solid;
+  border-color: rgba(140, 109, 57, 0.05) rgba(140, 109, 57, 0.05) transparent transparent;
+  transform: rotate(-15deg); /* دوران خفيف للمثلث */
+  opacity: 0.6; /* شفافية إضافية */
+}
+
+
+/* 2. الأشكال الهندسية الطافية (تطوير الوضوح) */
+.hero-geometric-shape {
+  position: absolute;
+  /* زيادة الشفافية قليلاً وتقوية الـ Blur */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* تحديد ذهبي أوضح مع إضافة توهج */
+  border: 1.5px solid rgba(197, 160, 89, 0.25); 
+  
+  /* إضافة شادو داخلي وخارجي ليعطي عمق (Depth) */
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.1);
+    
+  opacity: 1; /* رفع الاوباستي الكلي */
+  pointer-events: none;
+  z-index: 4;
+  transition: all 0.5s ease;
+}
+
+/* إضافة لمسة "لمعان" (Reflections) على الأشكال */
+.hero-geometric-shape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(197, 160, 89, 0.05) 100%
+  );
+  border-radius: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.scroll-indicator-section {
+    min-height: 40vh; /* يعطي مساحة كافية للتنفس */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* لضمان ظهور ظلال الفيديو خلفه */
+    position: relative;
+    z-index: 2;
+    padding: 60px 0;
+}
+
+.indicator-content {
+    text-align: center;
+    color: var(--text-muted); /* لون هادئ لا يشتت العين */
+    opacity: 0.8;
+}
+
+.info-icon-minimal {
+    font-size: 1.2rem;
+    color: var(--primary-gold); /* الذهبي الملكي المطفي */
+    margin-bottom: 15px;
+    display: block;
+}
+
+.minimal-scroll-text {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* حركة خط التمرير البسيطة تحت النص */
+.scroll-line-animated {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--primary-gold), transparent);
+    margin: 20px auto 0;
+    transform-origin: top;
+    animation: scrollLineMove 2s infinite ease-in-out;
+}
+
+@keyframes scrollLineMove {
+    0% { transform: scaleY(0); opacity: 0; }
+    50% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(1); opacity: 0; transform: translateY(20px); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Essence Section (Seamless Luxury) --- */
+.essence-section-luxury {
+    padding: 100px 8%;
+   
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative; /* ضروري لتموضع الإطار */
+   
+}
+
+/* الإطار الذهبي الناعم (البرواز) */
+.luxury-frame-border {
+    position: absolute;
+    top: 40px;    /* المسافة من الأعلى */
+    bottom: 40px; /* المسافة من الأسفل */
+    left: 40px;   /* المسافة من اليسار */
+    right: 40px;  /* المسافة من اليمين */
+    border: 2px solid rgba(140, 109, 57, 0.2); /* ذهبي خافت وناعم */
+    pointer-events: none; /* لضمان عدم إعاقة الضغط على العناصر */
+    z-index: 1;
+    border-radius: 20px;
+  
+    
+}
+
+.essence-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 60px;
+    
+    margin: 0 auto;
+    align-items: center;
+    z-index: 2; /* ليكون فوق الإطار */
+   
+}
+
+/* تنسيق الصورة */
+.product-wrapper {
+    position: relative;
+   
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.floating-bottle-premium {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    animation: float-bottle-pro 6s ease-in-out infinite;
+}
+
+.dynamic-shadow-premium {
+    width: 70%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgb(98, 77, 63) 0%, rgb(0, 0, 0) 75%);
+    filter: blur(2px);
+    margin-top: 20px;
+    animation: shadow-pro 6s ease-in-out infinite;
+    border-radius: 60%;
+}
+
+/* تنسيق النص النقي (بدون باك جراوند) */
+.clean-text-content {
+    position: relative;
+    padding-left: 30px; /* مسافة بسيطة عن الخط الزمردي */
+}
+
+.gold-label {
+    display: block;
+    color: var(--primary-gold);
+    letter-spacing: 5px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--font-secondary);
+    margin-bottom: 20px;
+}
+
+.clean-text-content h2 {
+    font-family: var(--font-primary);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--text-main);
+    margin-bottom: 25px;
+}
+
+.highlight-gold {
+    color: var(--primary-gold);
+    font-style: italic;
+}
+
+.clean-text-content p {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+    font-family: var(--font-secondary);
+    max-width: 480px;
+}
+
+/* التاج الزمردي الصغير (لمسة الهوية) */
+.emerald-accent-tag {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 3px;
+    height: 40px;
+    background: #043927; /* Emerald */
+}
+
+/* حركات الأنميشن */
+@keyframes float-bottle-pro {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+}
+
+@keyframes shadow-pro {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(0.75); opacity: 0.05; }
+}
+
+@media (max-width: 992px) {
+    .essence-grid-container { grid-template-columns: 1fr; text-align: center; }
+    .clean-text-content { padding-left: 0; }
+    .emerald-accent-tag { display: none; }
+    .luxury-frame-border { top: 20px; bottom: 20px; left: 20px; right: 20px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 3. Ritual Gallery --- */
+/* --- Ritual Gallery: Infinite Grid Motion --- */
+
+.ritual-section {
+    padding: 120px 0;
+    overflow: hidden;
+    background-color: var(--bg-cream);
+}
+
+.ritual-container-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* تأثير التلاشي الجانبي باللون الكريمي */
+.ritual-blur-overlay {
+    position: absolute;
+    top: 0;
+    width: 300px; /* زيادة المساحة لعمق أكبر */
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ritual-blur-overlay.left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-cream) 40%, transparent);
+}
+
+.ritual-blur-overlay.right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-cream) 40%, transparent);
+}
+
+/* التراك الذي سيحرك الشبكات بجانب بعضها */
+.ritual-loop-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+}
+
+/* تصميم الشبكة (Grid) كما طلبته بالضبط */
+.ritual-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 120px); /* عرض ثابت لضمان حركة سلسة */
+    grid-template-rows: repeat(2, 400px);
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.ritual-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: var(--secondary-cream);
+
+    border: 1px solid rgba(140, 109, 57, 0.1);
+}
+
+/* التقسيم الذي طلبته */
+.item-1 { grid-column: span 8; }
+.item-2 { grid-column: span 4; }
+.item-3 { grid-column: span 5; }
+.item-4 { grid-column: span 7; }
+
+
+/* لمسة جمالية: تظليل داخلي خفيف جداً على السيكشن */
+.ritual-container-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 100px #F9F5F0; /* بلور داخلي كريمي */
+    pointer-events: none;
+    z-index: 5;
+}
+/* --- تعديل بسيط في الترانزيشن الأساسي --- */
+.ritual-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.1);
+    
+    /* زيادة المدة لـ 2 ثانية واستخدام منحنى فخم جداً */
+    transition: 
+        transform 2s cubic-bezier(0.19, 1, 0.22, 1), 
+        filter 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+    
+    will-change: transform; /* تحسين الأداء لضمان نعومة الحركة */
+}
+
+/* --- تعديل الـ Hover ليكون أقل حدة وأكثر انسيابية --- */
+.ritual-item:hover img {
+    /* تكبير بسيط جداً (1.07 بدل 1.1) ليكون أهدأ */
+    transform: scale(1.07); 
+    filter: brightness(1.02) contrast(1.05);
+}
+
+/* --- إضافة لمسة ناعمة إضافية: تفتيح الحواف عند الهافر --- */
+.ritual-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 50%, rgba(249, 245, 240, 0.2));
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+.ritual-item:hover::before {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 4. Statement Section --- */
+.statement-section {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 10%;
+  background-color: var(--bg-cream);
+}
+
+.gold-line {
+  width: 1px;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--primary-gold));
+  margin-bottom: 40px;
+}
+
+.statement-text {
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.4;
+  max-width: 1000px;
+  color: var(--text-main);
+}
+
+.statement-author {
+  margin-top: 30px;
+  font-family: var(--font-secondary);
+  letter-spacing: 4px;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
