@@ -54,6 +54,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  
+     margin-top: 95px;
 }
 
 /* 2. السبتيتل - النمط الملكي المتباعد */
@@ -66,7 +68,7 @@
     font-weight: 700;
     margin-bottom: 40px;
     opacity: 0.8;
-    
+   
 }
 
 /* 3. غلاف العنوان والكلمة الخلفية */
@@ -974,6 +976,9 @@
 /* --- التعديلات الخاصة بالشاشات المتوسطة (1200px) --- */
 
 @media (max-width: 1200px) {
+    .about-hero-content{
+          margin-top: 45px;
+    }
     .about-story-section {
         padding: 120px 0;
     }
@@ -1207,6 +1212,9 @@
   
     margin-bottom: 0;
 }
+   .about-hero-content{
+          margin-top: 5px;
+    }
 }
 
 
