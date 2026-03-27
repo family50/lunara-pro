@@ -87,6 +87,7 @@ export const discoverMoreProducts: DiscoverMoreProducts = {
       img22: "/assets/background/hair1.png",
       Motivation:"Elevate your ritual from routine to royalty—where every drop is a masterpiece of science and silk." ,
       dark3: "rgb(255, 229, 181)", 
+      
     },
     products: [
       {
@@ -235,7 +236,7 @@ step4:"Use daily as a consistent part of your routine to repair dry skin and mai
         { user: "Noha Rifaat", rating: 5, comment: "Deeply hydrating and the spicy scent is quite bold and unique." },
         { user: "Karim Yehia", rating: 4, comment: "A different kind of hand cream. Absorbs very quickly." }
       ],
-       backgroundProduct: "#971717",
+       backgroundProduct: "#200505",
       textColorProduct: "#ffc8c1",
     },
     {
@@ -257,8 +258,8 @@ step4:"This alluring blend is best worn at night to fully capture its sophistica
         { user: "Ramy Said", rating: 4.5, comment: "Perfect winter fragrance. Very warm and catches everyone's attention." },
         { user: "Mayada Ahmed", rating: 5, comment: "Obsessed with the cherry-almond mix. Lasts forever on clothes." }
       ],
-        backgroundProduct: "#5e100e",
-      textColorProduct: "#dff9fd",
+        backgroundProduct: "#211212",
+      textColorProduct: "#feffff",
     },
     {
       id: 5,

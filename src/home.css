@@ -66,18 +66,20 @@
 }
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  /* التدرج الكريمي مع زيادة كثافة القاع لإخفاء العلامة المائية */
-  background: linear-gradient(
-    to bottom, 
-    rgba(230, 222, 211, 0.2) 0%,   
-    transparent 45%,               
-    rgba(249, 245, 240, 0.9) 80%,  /* تقوية الشادو قليلاً */
-    rgba(249, 245, 240, 1) 100%    
-  );
-  z-index: 1;
-  pointer-events: none;
+    content: '';
+    position: absolute;
+    inset: 0; 
+    
+    /* تدرج لوني يبدأ من الأسفل بلون الخلفية الكامل ليغطي العلامة المائية */
+    /* وينتشر للأعلى ليختفي تدريجياً بنعومة */
+background: linear-gradient(
+    to top,
+    rgba(249, 245, 240, 1) 0%,    /* البداية: تغطية كاملة 100% */
+    rgba(249, 245, 240, 1) 10%,   /* الحفاظ على التغطية الكاملة حتى ربع الشاشة (أكبر من السابق) */
+    rgba(249, 245, 240, 0.7) 40%, /* انتشار واسع ونبيل يبدأ بالتلاشي عند المنتصف */
+    rgba(249, 245, 240, 0) 70%    /* النهاية: التلاشي الكامل لا يحدث إلا عند قمة السيكشن تقريباً */
+);
+    z-index: 2; 
 }
  
 /* --- THE Majestic TYPOGRAPHY --- */
@@ -160,6 +162,7 @@
   opacity: 0.8; 
   pointer-events: none;
   z-index: 3;
+
 }
 
 /* التوهج المحيطي (أوضح بنسبة بسيطة) */
@@ -171,13 +174,22 @@
   left: 50%;
   transform: translateX(-50%);
   width: 5px; /* كانت 4px */
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(197, 160, 89, 0.25), /* زيادة تركيز الضوء */
-    transparent
-  );
   filter: blur(3px);
+      content: '';
+    position: absolute;
+    inset: 0; 
+    
+    /* تدرج لوني يبدأ من الأسفل بلون الخلفية الكامل ليغطي العلامة المائية */
+    /* وينتشر للأعلى ليختفي تدريجياً بنعومة */
+background: linear-gradient(
+    to top,
+    rgba(249, 245, 240, 1) 0%,    /* البداية: تغطية كاملة 100% */
+    rgba(249, 245, 240, 1) 25%,   /* الحفاظ على التغطية الكاملة حتى ربع الشاشة (أكبر من السابق) */
+    rgba(249, 245, 240, 0.7) 55%, /* انتشار واسع ونبيل يبدأ بالتلاشي عند المنتصف */
+    rgba(249, 245, 240, 0) 90%    /* النهاية: التلاشي الكامل لا يحدث إلا عند قمة السيكشن تقريباً */
+);
+    
+    z-index: 2; 
 }
 
 /* النقطة المتحركة (أوضح قليلاً لتعطي حياة للخط) */
@@ -334,61 +346,6 @@
 
 
 
-.scroll-indicator-section {
-    min-height: 40vh; /* يعطي مساحة كافية للتنفس */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent; /* لضمان ظهور ظلال الفيديو خلفه */
-    position: relative;
-    z-index: 2;
-    padding: 60px 0;
-}
-
-.indicator-content {
-    text-align: center;
-    color: var(--text-muted); /* لون هادئ لا يشتت العين */
-    opacity: 0.8;
-}
-
-.info-icon-minimal {
-    font-size: 1.2rem;
-    color: var(--primary-gold); /* الذهبي الملكي المطفي */
-    margin-bottom: 15px;
-    display: block;
-}
-
-.minimal-scroll-text {
-    font-family: var(--font-secondary);
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* حركة خط التمرير البسيطة تحت النص */
-.scroll-line-animated {
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(to bottom, var(--primary-gold), transparent);
-    margin: 20px auto 0;
-    transform-origin: top;
-    animation: scrollLineMove 2s infinite ease-in-out;
-}
-
-@keyframes scrollLineMove {
-    0% { transform: scaleY(0); opacity: 0; }
-    50% { transform: scaleY(1); opacity: 1; }
-    100% { transform: scaleY(1); opacity: 0; transform: translateY(20px); }
-}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -425,6 +382,36 @@
 
 
 /* --- Essence Section (Seamless Luxury) --- */
+.ritual-label-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 110px; /* مساحة بيضاء فخمة قبل بدء الصور */
+ 
+}
+
+.ritual-small-label {
+    font-family: var(--font-secondary); /* الخط الثانوي الأنيق */
+    font-size: 0.75rem;
+    letter-spacing: 5px; /* تباعد الحروف سر الفخامة */
+    text-transform: uppercase;
+    color: var(--primary-gold); /* لون ذهبي مطفي */
+    opacity: 0.8;
+    position: relative;
+    display: inline-block;
+}
+
+/* إضافة خط صغير جداً تحت الكلمة لزيادة الأناقة (اختياري) */
+.ritual-small-label::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 1px;
+    background-color: var(--primary-gold);
+    opacity: 0.5;
+}
 .essence-section-luxury {
     padding: 100px 8%;
    
@@ -446,8 +433,8 @@
     pointer-events: none; /* لضمان عدم إعاقة الضغط على العناصر */
     z-index: 1;
     border-radius: 20px;
-  
-    
+
+   
 }
 
 .essence-grid-container {
@@ -455,10 +442,15 @@
     grid-template-columns: 1fr 1.1fr;
     gap: 60px;
     
-    margin: 0 auto;
+    /* الإضافات الجوهرية للتوسيط */
+    max-width: 1200px;      /* حدد أقصى عرض تريده للمحتوى (مثلاً 1200px) */
+    width: 90%;             /* لضمان وجود مساحة (padding) عند تصغير الشاشة */
+    margin: 0 auto;         /* التوسيط السحري: 0 من الأعلى والأسفل، و auto من الجوانب */
+    
     align-items: center;
-    z-index: 2; /* ليكون فوق الإطار */
-   
+    justify-content: center; /* لضمان توسيط العناصر داخل الـ grid نفسه */
+    z-index: 2;
+    position: relative;     /* لضمان عمل z-index بشكل صحيح */
 }
 
 /* تنسيق الصورة */
@@ -466,9 +458,11 @@
     position: relative;
    
     width: 50%;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
+   
 }
 
 .floating-bottle-premium {
@@ -604,6 +598,61 @@
 
 
 
+
+
+
+
+
+
+
+
+
+.scroll-indicator-section {
+    min-height: 40vh; /* يعطي مساحة كافية للتنفس */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* لضمان ظهور ظلال الفيديو خلفه */
+    position: relative;
+    z-index: 2;
+    padding: 60px 0;
+}
+
+.indicator-content {
+    text-align: center;
+    color: var(--text-muted); /* لون هادئ لا يشتت العين */
+    opacity: 0.8;
+}
+
+.info-icon-minimal {
+    font-size: 1.2rem;
+    color: var(--primary-gold); /* الذهبي الملكي المطفي */
+    margin-bottom: 15px;
+    display: block;
+}
+
+.minimal-scroll-text {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* حركة خط التمرير البسيطة تحت النص */
+.scroll-line-animated {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--primary-gold), transparent);
+    margin: 20px auto 0;
+    transform-origin: top;
+    animation: scrollLineMove 2s infinite ease-in-out;
+}
+
+@keyframes scrollLineMove {
+    0% { transform: scaleY(0); opacity: 0; }
+    50% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(1); opacity: 0; transform: translateY(20px); }
+}
 
 
 
@@ -786,3 +835,777 @@
   font-size: 0.8rem;
 }
 
+/* --- 4. Statement Section (Updated: Clearer Stone Background) --- */
+.statement-section {
+    height: 100vh; /* زدت الارتفاع قليلاً لتعطي الصورة حقها */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 10%;
+    
+    /* إعدادات الصورة الخلفية مع تعديل الوضوح */
+    background-image: linear-gradient(
+        to bottom, 
+        rgba(249, 245, 240, 0.83), /* تم تقليل التعتيم من 0.85 إلى 0.65 لظهور أكبر للصورة */
+        rgba(249, 245, 240, 0.823)
+    ), 
+    url('/stone-texture.png'); /* تأكد من اسم صورتك وامتدادها .png أو .jpg */
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* تأثير سينمائي يجعل الصورة ثابتة عند التمرير */
+    position: relative;
+    overflow: hidden;
+}
+
+/* إضافة لمسة فنية: تظليل ناعم من الأعلى والأسفل لدمج الصخرة مع السكاشن الأخرى */
+.statement-section::before,
+.statement-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.statement-section::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-cream), transparent);
+}
+
+.statement-section::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-cream), transparent);
+}
+
+/* تأكد أن النصوص فوق طبقة الـ Overlay */
+.gold-line, .statement-text, .statement-author {
+    position: relative;
+    z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Media Query for 1200px and below --- */
+@media (max-width: 1200px) {
+    
+    /* 1. تصغير الحاوية العامة */
+    .hero-content {
+        max-width: 900px;
+    }
+
+    /* 2. تصغير الخطوط في الهيرو */
+    .hero-title {
+        font-size: 5rem; /* تصغير العنوان الرئيسي */
+        margin-bottom: 25px;
+    }
+
+    .hero-description {
+        font-size: 1.4rem;
+        max-width: 600px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+    }
+
+    /* 3. تعديل الأشكال الهندسية لتناسب المساحة الأصغر */
+    .shape-diamond-1 { width: 90px; height: 90px; left: 8%; }
+    .shape-circle-1 { width: 140px; height: 140px; right: 10%; }
+    .shape-triangle-1 { width: 180px; height: 180px; left: 12%; border-width: 90px; }
+
+/* 2. الأشكال الهندسية الطافية (تطوير الوضوح) */
+.hero-geometric-shape {
+  position: absolute;
+  /* زيادة الشفافية قليلاً وتقوية الـ Blur */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* تحديد ذهبي أوضح مع إضافة توهج */
+  border: 1.5px solid rgba(197, 160, 89, 0.25); 
+  
+  /* إضافة شادو داخلي وخارجي ليعطي عمق (Depth) */
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.1);
+    
+  opacity: 1; /* رفع الاوباستي الكلي */
+  pointer-events: none;
+  z-index: 4;
+  transition: all 0.5s ease;
+}
+
+/* إضافة لمسة "لمعان" (Reflections) على الأشكال */
+.hero-geometric-shape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(197, 160, 89, 0.05) 100%
+  );
+  border-radius: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    /* 4. سيكشن Essence (الجزء الثاني) */
+    .essence-section-luxury {
+        padding: 60px 5%;
+    }
+
+    .clean-text-content h2 {
+        font-size: 2.8rem; /* تصغير العنوان */
+    }
+
+    .clean-text-content p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .essence-grid-container {
+        gap: 40px; /* تقليل الفجوة */
+    }
+
+    .luxury-frame-border {
+        top: 25px;
+        bottom: 25px;
+        left: 25px;
+        right: 25px;
+    }
+
+    /* 5. سيكشن الـ Ritual (الصور المتحركة) */
+    .ritual-grid {
+        grid-template-columns: repeat(12, 100px); /* تصغير عرض الأعمدة من 120 لـ 100 */
+        grid-template-rows: repeat(2, 320px);      /* تصغير الارتفاع من 400 لـ 320 */
+        gap: 15px;
+    }
+    
+    .ritual-label-container {
+        margin-bottom: 60px; /* تقليل الفراغ العلوي */
+    }
+
+    /* 6. سيكشن المقولة (Statement) */
+    .statement-text {
+        font-size: 3rem; /* تصغير خط المقولة */
+        max-width: 850px;
+    }
+
+    .gold-line {
+        height: 70px; /* تقليل طول الخط الذهبي */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* --- Media Query for iPad Pro & Tablets (1025px) --- */
+@media (max-width: 1025px) {
+
+   
+    /* 3. تعديل السيكشن الثاني (Essence): نصوص فوق وصورة تحت */
+    .essence-grid-container {
+        grid-template-columns: 1fr; /* تحويل لعمود واحد */
+        text-align: center;         /* توسيط كل النصوص */
+        gap: 50px;
+        max-width: 700px;           /* حصر العرض ليكون مريحاً للعين */
+    }
+
+    /* عكس الترتيب: النص يظهر أولاً فوق */
+    .clean-text-content {
+        order: 1; 
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* توسيط العناصر داخلياً */
+    }
+
+    .product-wrapper {
+        order: 2;
+        width: 100%;
+        align-items: center;
+    }
+
+    .floating-bottle-premium {
+        max-width: 300px; /* تصغير حجم الزجاجة لتناسب الوضع العمودي */
+        margin: 0 auto;
+    }
+
+    .clean-text-content h2 {
+        font-size: 2.5rem;
+        margin: 0 auto 20px;
+    }
+
+    .clean-text-content p {
+        margin: 0 auto; /* توسيط الفقرة */
+        font-size: 1.1rem;
+    }
+
+    /* إخفاء التاج الزمردي الجانبي أو جعله أفقياً صغيراً فوق العنوان */
+    .emerald-accent-tag {
+        position: relative;
+        left: unset;
+        top: 0;
+        width: 40px;
+        height: 2px;
+        margin-bottom: 15px;
+    }
+    
+
+
+
+
+
+
+/* 1. تقليل عرض التلاشي الجانبي (Blur Overlay) */
+    .ritual-blur-overlay {
+        width: 200px; /* تقليل العرض من 300px لـ 150px لزيادة مساحة رؤية الصور */
+    }
+
+    .ritual-blur-overlay.left {
+        background: linear-gradient(to right, var(--bg-cream) 30%, transparent);
+    }
+
+    .ritual-blur-overlay.right {
+        background: linear-gradient(to left, var(--bg-cream) 30%, transparent);
+    }
+
+    /* 2. تقليل الشادو الداخلي العميق للسيكشن */
+    .ritual-container-wrapper::after {
+        /* تقليل الـ blur من 100px لـ 40px ليكون التحديد أنعم وأقل حدة */
+        box-shadow: inset 0 0 40px var(--bg-cream); 
+    }
+
+    /* 3. تعديل حجم الشبكة لتناسب اللمس (Touch) وشاشات التابلت */
+    .ritual-grid {
+        grid-template-columns: repeat(12, 90px); /* حجم متوسط بين اللابتوب والموبايل */
+        grid-template-rows: repeat(2, 300px);     /* تقليل الارتفاع قليلاً */
+        gap: 15px;
+    }
+
+    /* 4. تعديل بسيط في الهوامش لتنفس العناصر */
+    .ritual-section {
+        padding: 80px 0;
+    }
+
+
+
+
+    
+
+
+        /* 6. سيكشن المقولة (Statement) */
+    .statement-text {
+        font-size: 2.5rem; /* تصغير خط المقولة */
+        max-width: 850px;
+    }
+
+    .gold-line {
+        height: 70px; /* تقليل طول الخط الذهبي */
+    }
+}
+
+
+
+
+
+
+
+
+
+/* --- Media Query for Mobile & Small Screens (650px) --- */
+@media (max-width: 650px) {
+
+    /* 1. تصغير الهيرو (Hero Section) */
+    .hero-title {
+        font-size: 3.2rem; /* حجم مناسب للموبايل */
+        margin-bottom: 20px;
+    }
+
+    .hero-description {
+        font-size: 1.4rem;
+        max-width: 90%; /* إعطاء مساحة أكبر للنص */
+        min-width: unset;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        letter-spacing: 3px;
+    }
+
+    /* تصغير الأشكال الهندسية جداً لعدم التشويش */
+    .shape-diamond-1 { width: 60px; height: 60px; left: 5%; }
+    .shape-circle-1 { width: 84px; height: 84px; right: 5%; }
+    .shape-triangle-1 { width: 120px; height: 120px; border-width: 70px; }
+
+/* 2. الأشكال الهندسية الطافية (تطوير الوضوح) */
+.hero-geometric-shape {
+  position: absolute;
+  /* زيادة الشفافية قليلاً وتقوية الـ Blur */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* تحديد ذهبي أوضح مع إضافة توهج */
+  border: 1.5px solid rgba(197, 160, 89, 0.25); 
+  
+  /* إضافة شادو داخلي وخارجي ليعطي عمق (Depth) */
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.1);
+    
+  opacity: 1; /* رفع الاوباستي الكلي */
+  pointer-events: none;
+  z-index: 4;
+  transition: all 0.5s ease;
+}
+
+/* إضافة لمسة "لمعان" (Reflections) على الأشكال */
+.hero-geometric-shape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(197, 160, 89, 0.05) 100%
+  );
+  border-radius: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+    /* 2. سيكشن Essence (بدون تغيير الترتيب، تصغير فقط) */
+    .essence-section-luxury {
+        padding: 40px 5%;
+    }
+
+    .clean-text-content h2 {
+        font-size: 1.8rem; /* تصغير العنوان */
+    }
+
+    .clean-text-content p {
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+
+    .floating-bottle-premium {
+        max-width: 200px; /* تصغير الزجاجة لتناسب الشاشة */
+    }
+
+    .luxury-frame-border {
+        top: 15px; bottom: 15px; left: 15px; right: 15px; /* تضييق البرواز */
+    }
+
+    /* 3. سيكشن الـ Ritual (الشبكة المتحركة) */
+    .ritual-grid {
+        /* تصغير حجم المربعات ليظل التراك بالكامل مرئياً وسلساً */
+        grid-template-columns: repeat(12, 65px); 
+        grid-template-rows: repeat(2, 200px);
+        gap: 10px;
+    }
+
+    .ritual-blur-overlay {
+        width: 100px; /* تقليل البلور الجانبي جداً */
+    }
+
+    .ritual-label-container {
+        margin-bottom: 40px;
+    }
+
+    /* 4. سيكشن المقولة (Statement) */
+    .statement-text {
+        font-size: 1.5rem; /* حجم هادئ للموبايل */
+        line-height: 1.5;
+        max-width: 95%;
+    }
+
+    .gold-line {
+        height: 50px;
+        margin-bottom: 25px;
+    }
+
+    /* 5. سيكشن التمرير (Scroll Indicator) */
+    .scroll-line-animated {
+        height: 40px;
+    }
+}
+
+/* --- Media Query for Small Mobile (430px and below) --- */
+@media (max-width: 430px) {
+
+/* 1. تكبير المسافات بين السكاشن (كانت 80px أصبحت ~105px) */
+    .hero-section, 
+    .essence-section-luxury, 
+    .ritual-section, 
+    .statement-section {
+        padding-top: -10px !important; 
+        padding-bottom: 105px !important;
+    }
+
+    /* 2. الهيرو (Hero) - تكبير العناوين والنصوص */
+    .hero-title {
+        font-size: 3.1rem; /* كانت 2.4rem */
+        margin-bottom: 32px;
+        line-height: 1.1;
+    }
+
+    .hero-description {
+        font-size: 1.3rem; /* كانت 1rem */
+        line-height: 1.7;
+        max-width: 90%;
+    }
+
+    /* تكبير الأشكال الهندسية بنسبة 30% */
+    .shape-diamond-1 { width: 60px; height: 60px; top: 10%; left: 2%; }
+    .shape-circle-1 { width: 85px; height: 85px; right: 2%; top: 40%; }
+    .shape-triangle-1 { width: 115px; height: 115px; border-width: 55px; bottom: 5%; left: 4%; }
+    /* 3. سيكشن Essence - ترتيب عمودي مريح */
+    .essence-grid-container {
+        gap: 60px; /* فجوة واسعة بين النص والمنتج */
+    }
+
+/* 2. الأشكال الهندسية الطافية (تطوير الوضوح) */
+.hero-geometric-shape {
+  position: absolute;
+  /* زيادة الشفافية قليلاً وتقوية الـ Blur */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* تحديد ذهبي أوضح مع إضافة توهج */
+  border: 1.5px solid rgba(197, 160, 89, 0.25); 
+  
+  /* إضافة شادو داخلي وخارجي ليعطي عمق (Depth) */
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.1);
+    
+  opacity: 1; /* رفع الاوباستي الكلي */
+  pointer-events: none;
+  z-index: 4;
+  transition: all 0.5s ease;
+}
+
+/* إضافة لمسة "لمعان" (Reflections) على الأشكال */
+.hero-geometric-shape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(197, 160, 89, 0.05) 100%
+  );
+  border-radius: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    .clean-text-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .clean-text-content p {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .floating-bottle-premium {
+        max-width: 180px;
+    }
+
+    /* 4. سيكشن الـ Ritual - شبكة الصور المتحركة */
+    .ritual-label-container {
+        margin-bottom: 50px;
+    }
+
+    .ritual-grid {
+        /* أحجام تسمح برؤية التفاصيل بوضوح داخل التراك */
+        grid-template-columns: repeat(12, 58px); 
+        grid-template-rows: repeat(2, 180px);
+        gap: 12px;
+    }
+
+    .ritual-blur-overlay {
+        width: 80px; /* توازن بين البلور ومساحة عرض الصور */
+    }
+
+    /* 5. سيكشن المقولة (Statement) - تركيز بصري عالي */
+    .statement-section {
+        min-height: 70vh; 
+        padding: 0 8% !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .statement-text {
+        font-size: 1.45rem;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .gold-line {
+        height: 60px;
+        margin-bottom: 30px;
+    }
+
+    /* 6. تفاصيل البرواز والمؤشرات */
+    .luxury-frame-border {
+        top: 20px; 
+        bottom: 20px; 
+        left: 20px; 
+        right: 20px;
+        border-width: 1px;
+    }
+
+    .scroll-indicator-section {
+        min-height: 25vh;
+        padding: 30px 0;
+    }
+
+    .scroll-line-animated {
+        height: 45px;
+    }
+}
+
+
+
+
+/* --- Media Query for Small Mobile (430px and below) - Balanced Scale --- */
+@media (max-width: 375px) {
+
+    /* 1. تقليل المسافات بين السكاشن بنسبة 20% (من 80px إلى 64px) */
+    .hero-section, 
+    .essence-section-luxury, 
+    .ritual-section, 
+    .statement-section {
+       
+        padding-bottom: 64px !important;
+    }
+
+    /* 2. الهيرو (Hero) - تصغير الأحجام بنسبة 20% */
+    .hero-title {
+        font-size: 2.1rem; /* تصغير من 2.4rem */
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .hero-description {
+        font-size: 1rem; /* تصغير من 1rem */
+        line-height: 1.5;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+/* 2. الأشكال الهندسية الطافية (تطوير الوضوح) */
+.hero-geometric-shape {
+  position: absolute;
+  /* زيادة الشفافية قليلاً وتقوية الـ Blur */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* تحديد ذهبي أوضح مع إضافة توهج */
+  border: 1.5px solid rgba(197, 160, 89, 0.25); 
+  
+  /* إضافة شادو داخلي وخارجي ليعطي عمق (Depth) */
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.1);
+    
+  opacity: 1; /* رفع الاوباستي الكلي */
+  pointer-events: none;
+  z-index: 4;
+  transition: all 0.5s ease;
+}
+
+/* إضافة لمسة "لمعان" (Reflections) على الأشكال */
+.hero-geometric-shape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(197, 160, 89, 0.05) 100%
+  );
+  border-radius: inherit;
+}
+
+
+
+
+
+    /* تحسين خصائص الأشكال */
+    .hero-geometric-shape {
+        backdrop-filter: blur(8px);
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    /* 3. سيكشن Essence - تقليل الفجوات والأحجام */
+    .essence-grid-container {
+        gap: 48px; /* تقليل الفجوة بنسبة 20% */
+    }
+
+    .clean-text-content h2 {
+        font-size: 1.45rem; /* تصغير من 1.8rem */
+        margin-bottom: 15px;
+    }
+
+    .clean-text-content p {
+        font-size: 0.8rem;
+        line-height: 1.6;
+    }
+
+    .floating-bottle-premium {
+        max-width: 145px; /* تصغير الزجاجة بنسبة 20% */
+    }
+
+    /* 4. سيكشن الـ Ritual - شبكة مدمجة */
+    .ritual-label-container {
+        margin-bottom: 40px;
+    }
+
+    .ritual-grid {
+        /* تصغير المربعات بنسبة 20% تقريباً */
+        grid-template-columns: repeat(12, 46px); 
+        grid-template-rows: repeat(2, 145px);
+        gap: 10px;
+    }
+
+    .ritual-blur-overlay {
+        width: 64px;
+    }
+
+    /* 5. سيكشن المقولة (Statement) */
+    .statement-section {
+        min-height: 55vh; /* تقليل الارتفاع الكلي */
+        padding: 0 10% !important;
+    }
+
+    .statement-text {
+        font-size: 1.15rem; /* تصغير من 1.45rem */
+        line-height: 1.4;
+    }
+
+    .gold-line {
+        height: 48px;
+        margin-bottom: 25px;
+    }
+
+    /* 6. تفاصيل الإطار والمؤشر */
+    .luxury-frame-border {
+        top: 16px; 
+        bottom: 16px; 
+        left: 16px; 
+        right: 16px;
+    }
+
+    .scroll-indicator-section {
+        min-height: 20vh;
+        padding: 25px 0;
+    }
+
+    .scroll-line-animated {
+        height: 36px;
+    }
+}

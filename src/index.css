@@ -74,5 +74,6 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--text-muted) var(--bg-cream);
+  
 }
 

@@ -85,8 +85,8 @@ useLayoutEffect(() => {
             <div className="collections-grid">
                 {categories.map((category) => (
                     <Link 
-                        to={`/shop/${category.id}`} 
-                        key={category.id} 
+                      to={`/all-products?section=${category.id}`} 
+            key={category.id}
                         className={`collection-card card-${category.id}`}
                     >
                         <div className="card-image-wrapper">

@@ -1,0 +1,1373 @@
+/* --- Global Wrapper --- */
+
+.about-page-wrapper {
+    background-color: var(--bg-cream);
+    color: var(--text-main);
+    overflow-x: hidden;
+        position: absolute;
+  top: 0;
+  left: 0;
+  
+  width: 100%;
+  /* تأكد من أن الارتفاع الأدنى يغطي الشاشة */
+  min-height: 100vh; 
+  
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  
+  /* تصفير إجباري */
+  margin: 0 !important;
+  padding: 0 !important;
+  
+  /* منع أي مشاكل عرضية */
+  overflow: hidden;
+}
+
+.about-container {
+ max-width: 85%;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+
+
+
+
+/* --- 1. Hero Section --- */
+.about-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--bg-cream);
+}
+
+
+
+/* 1. السبتيتل - لمسة الذهب الملكي */
+/* 1. الحاوية العامة - زيادة التنفس */
+.about-hero-content {
+    z-index: 10;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 2. السبتيتل - النمط الملكي المتباعد */
+.subtitle-gold {
+    font-family: var(--font-secondary);
+    color: var(--primary-gold);
+    letter-spacing: 0.8em; /* تباعد ضخم يعطي هيبة */
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 40px;
+    opacity: 0.8;
+    
+}
+
+/* 3. غلاف العنوان والكلمة الخلفية */
+.title-wrapper {
+    position: relative;
+    margin-bottom: 40px;
+    
+}
+
+.about-main-title {
+    font-family: var(--font-primary);
+    font-size: clamp(4rem, 10vw, 7.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    color: var(--text-main);
+    position: relative;
+    z-index: 2;
+  
+}
+
+/* حركة دمج الخط المائل مع العادي (أسلوب مجلات الموضة) */
+.italic-gold {
+    font-family: var(--font-primary);
+    font-style: italic;
+    color: var(--primary-gold);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+/* العلامة المائية خلف النص */
+.bg-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    font-family: var(--font-primary);
+    font-size: 1.5em; /* ضخمة جداً */
+    color: var(--primary-gold);
+    opacity: 0.04; /* خافتة جداً كأنها ظل */
+    letter-spacing: 0.2em;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- 1. Hero Section (Updated Video Polish) --- */
+
+/* حاوي الفيديو والظلال */
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* زيادة الشفافية ليصبح الفيديو واضحاً وفخماً */
+    opacity: 0.6; 
+    
+    /* إضافة فلاتر لزيادة الفخامة (Deep Cream & Gold Tone) */
+    filter: sepia(30%) brightness(0.9) contrast(1.1);
+    
+    z-index: 1; /* خلف المحتوى النصي */
+}
+
+/* تنسيق الفيديو الأساسي */
+.hero-bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* يغطي المساحة بالكامل دون تمطيط */
+    /* منع أي تداخل ماوس مع الفيديو */
+    pointer-events: none; 
+}
+
+/* --- 2. THE LUXURY BOTTOM OVERLAY (إخفاء العلامة المائية بتركيز عالي) --- */
+.hero-video-container::after {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    
+    /* تدرج لوني يبدأ من الأسفل بلون الخلفية الكامل ليغطي العلامة المائية */
+    /* وينتشر للأعلى ليختفي تدريجياً بنعومة */
+    background: linear-gradient(
+        to top,
+        rgba(249, 245, 240, 1) 0%,    /* لون صلب 100% عند الحافة السفلية */
+        rgba(249, 245, 240, 1) 1%,   /* الحفاظ على قوة اللون لمسافة بسيطة لضمان الإخفاء */
+        rgba(249, 245, 240, 0.8) 35%, /* انتشار الشادو بنسبة 80% حتى ثلث السيكشن تقريباً */
+        rgba(249, 245, 240, 0) 65%    /* تلاشي الشادو تماماً قبل الوصول للمنتصف */
+    );
+    
+    z-index: 2; 
+}
+
+/* إزالة أي شادو علوي قديم لتركيز الرؤية على الفيديو من الأعلى */
+.hero-video-container {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 2. Story Section (The Grand Origin) --- */
+.about-story-section {
+    padding: 200px 0; /* زيادة المسافة الرأسية لإعطاء هيبة للسيكشن */
+    background-color: var(--bg-cream);
+}
+
+.about-container.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* جعل مساحة الصورة أكبر قليلاً من النص */
+    gap: 150px; /* زيادة الفجوة بين الصورة والنص للتنفس */
+    align-items: center;
+}
+
+.story-image-wrapper {
+    position: relative;
+    padding: 0; /* إزالة البادينج الداخلي لتركيز قوة الظل */
+}
+
+.reveal-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: sepia(15%) contrast(1.05); /* لمسة دافئة سينمائية */
+    
+    /* الظل الصلب الذي أعجبك مع تكبير الإزاحة قليلاً ليتناسب مع الأحجام الكبيرة */
+    box-shadow: 30px 30px 0px var(--secondary-cream); 
+    
+    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* حركة بسيطة عند الهافر تعزز الفخامة */
+.reveal-img:hover {
+    transform: translate(-10px, -10px);
+    box-shadow: 45px 45px 0px var(--secondary-cream);
+}
+
+/* النصوص التوضيحية */
+.story-text-content {
+    max-width: 550px; /* حصر العرض لجعل الأسطر مريحة للعين */
+}
+
+.section-title-gold {
+    font-family: var(--font-primary);
+    color: var(--primary-gold);
+    font-size: clamp(3.5rem, 6vw, 4.5rem); /* حجم ضخم وفخم */
+    margin-bottom: 40px;
+    line-height: 1.1;
+    font-weight: 400;
+}
+
+.p-accent {
+    font-size: 1.8rem; /* تكبير الخط الافتتاحي */
+    font-family: var(--font-primary);
+    color: var(--text-main);
+    margin-bottom: 30px;
+    font-style: italic;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.p-muted {
+    font-family: var(--font-secondary);
+    color: var(--text-muted);
+    font-size: 1.15rem; /* حجم مريح للقراءة الطويلة */
+    line-height: 2.2; /* تباعد أسطر واسع جداً ليعطي شعور بالرفاهية */
+    letter-spacing: 0.02em;
+    font-weight: 300;
+}
+
+/* لمسة إضافية: رقم السيكشن بخط خافت جداً */
+.story-text-content::before {
+    content: "01";
+    font-family: var(--font-primary);
+    font-size: 5rem;
+    color: var(--primary-gold);
+    opacity: 0.07;
+    position: absolute;
+    top: -60px;
+    left: -20px;
+    z-index: -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 3. Pillars Section --- */
+.about-pillars-section {
+    padding: 250px 0; /* زيادة المسافة الرأسية */
+    
+    position: relative;
+    overflow: hidden; /* ضروري لأن الخط المتموج قد يخرج عن الحدود */
+   
+}
+
+.pillars-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 120px; /* مسافة كبيرة بين كل قيمة والثانية */
+    
+    
+}
+
+.pillar-card {
+    position: relative;
+    max-width: 500px;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+
+
+/* الرقم الخلفي الضخم */
+.pillar-number {
+    position: absolute;
+    top: -40px;
+    left: -60px;
+    font-family: var(--font-primary);
+    font-size: 10rem;
+    color: var(--primary-gold);
+    opacity: 0.05; /* خافت جداً كأنه محفور في الحائط */
+    z-index: 1;
+}
+
+.pillar-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* خط ذهبي رفيع بجانب العنوان */
+.pillar-icon-line {
+    width: 40px;
+    height: 1px;
+    background: var(--primary-gold);
+    margin-bottom: 20px;
+    transition: width 0.6s ease;
+}
+
+.pillar-card:hover .pillar-icon-line {
+    width: 80px; /* حركة بسيطة عند الهافر */
+}
+
+.pillar-card h3 {
+    font-family: var(--font-primary);
+    font-size: 2.8rem;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    letter-spacing: -0.02em;
+}
+
+.pillar-card p {
+    font-family: var(--font-secondary);
+    color: var(--text-main);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+/* --- 3. The Pillars: Textured Glass Monoliths --- */
+
+.pillar-card {
+    position: relative;
+    max-width: 550px;
+    padding: 60px 50px;
+    background: rgba(255, 255, 255, 0.2); /* خلفية بيضاء شفافة جداً */
+    backdrop-filter: blur(15px); /* تأثير الـ Frosted */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 30px 60px rgba(140, 109, 57, 0.04);
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 2;
+    overflow: hidden; /* ضروري لقص الصورة الزائدة عن اللوحة */
+}
+
+
+/* --- حركة الهافر للزجاج والصورة --- */
+.pillar-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--primary-gold);
+}
+
+.pillar-card:hover::before {
+    opacity: 0.05; /* تزداد وضوحاً قليلاً عند الهافر لتعزيز التفاعل */
+    transform: scale(1.1); /* تكبير الصورة ببطء لتعطي عمقاً (Parallax effect) */
+}
+
+/* --- تخصيص الصور الثلاثة (يمكنك استبدال الروابط) --- */
+.pillar-card.p-left::before {
+    background-image: url('/YOUR_IMAGE_URL_FOR_PURITY.png'); /* مثال: صورة ماكرو لقطرة زيت ذهبية */
+}
+
+.pillar-card.p-right::before {
+    background-image: url('/YOUR_IMAGE_URL_FOR_CRAFT.png'); /* مثال: صورة فنية لزجاجة منحوتة خافتة */
+}
+
+.pillar-card.p-center::before {
+    background-image: url('/YOUR_IMAGE_URL_FOR_CONSCIOUS.png'); /* مثال: صورة لغصن نبات نادر كريمي */
+}
+
+/* --- تنسيق المحتوى ليكون فوق الصورة بوضوح --- */
+.pillar-content {
+    position: relative;
+    z-index: 3; /* فوق صورة الخلفية الخافتة */
+}
+
+.pillar-number {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 8rem;
+    font-family: var(--font-primary);
+    color: var(--primary-gold);
+    opacity: 0.08;
+    z-index: 2;
+    user-select: none;
+}
+/* --- 3. Pillars Section (The Path of Lunara) --- */
+.about-pillars-section {
+    padding: 250px 0; /* زيادة المسافة الرأسية */
+    background-color: var(--bg-cream);
+    position: relative;
+    overflow: hidden; /* ضروري لأن الخط المتموج قد يخرج عن الحدود */
+}
+
+/* --- الخط الترابي المتموج (The Earthy Silk Path) --- */
+/* هذا العنصر هو الذي ستقوم بتحريكه بواسطة GSAP (DrawSVG plugin) */
+.pillars-path-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3; /* شفافية الخط ليكون "ترابياً" ناعماً */
+}
+
+.path-line {
+    fill: none;
+    stroke: var(--primary-gold); /* أو لون كريمي ترابي غامق */
+    stroke-width: 1.5;
+    stroke-dasharray: 10, 5; /* خط منقط بسيط ليعطي إيحاء بالخياطة أو المسار */
+    /* التموج سيتم رسمه في الـ SVG بالأسفل */
+}
+
+.pillars-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 180px; /* فجوة رأسية ضخمة */
+    position: relative;
+    z-index: 2;
+}
+
+.pillar-card {
+    position: relative;
+    max-width: 550px;
+    padding: 80px 60px; /* زيادة المساحة قليلاً للصور الواضحة */
+    background: rgba(255, 255, 255, 0.6); /* خلفية بيضاء أوضح لتعمل كقاعدة للصورة */
+    backdrop-filter: blur(12px); /* تقليل البلور قليلاً لزيادة حدة ما خلف الزجاج */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 40px 100px rgba(140, 109, 57, 0.08);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+/* --- الصور الخلفية: واضحة وبدون فلاتر --- */
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    
+    /* رفع الشفافية لدرجة عالية */
+    opacity: 0.5; 
+    
+    /* إلغاء الفلاتر تماماً لرؤية الألوان الأصلية (الذهبي والكريمي) */
+    filter: none; 
+    
+    transition: opacity 0.6s ease, transform 1.2s ease;
+    z-index: 1;
+}
+
+/* عند مرور الماوس: الصورة تصبح كاملة الوضوح تقريباً */
+.pillar-card:hover::before {
+    opacity: 0.8;
+    transform: scale(1.08); /* حركة زووم هادئة */
+}
+
+/* --- طبقة حماية النص (Gradient Overlay) --- */
+/* بما أن الصورة أصبحت واضحة، نحتاج لظل خفيف جداً خلف النص لضمان المقروئية */
+.pillar-content {
+    position: relative;
+    z-index: 3;
+    /* إضافة ظل ناعم جداً خلف النصوص ليبرز فوق الصورة */
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.pillar-card:hover::before {
+    opacity: 0.4; /* وضوح عالٍ عند التفاعل */
+    transform: scale(1.05);
+}
+
+/* --- التباعد العرضي الأقصى --- */
+.p-left { align-self: flex-start; margin-left: 2%; }
+.p-right { align-self: flex-end; margin-right: 2%; }
+.p-center { align-self: center; margin-top: -50px; }
+
+/* --- تأثير GSAP التحضيري --- */
+/* هذه الكلاسات ستتحكم بها لاحقاً */
+.pillar-card.is-hidden {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+
+.path-container {
+    width: 100%;
+    height: 1800px;
+    /* بنرسم المسار هنا كأنه قناع أو مسار حركة */
+    offset-path: path("M720,0 C720,300 200,400 200,700 C200,1000 1240,1100 1240,1400 C1240,1600 720,1700 720,1800");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 4. 3D Ritual Section --- */
+.about-ritual-3d {
+    padding: 150px 0;
+    text-align: center;
+}
+
+.canvas-3d-wrapper {
+    position: relative;
+    margin-top: 50px;
+}
+
+.floating-3d-asset {
+    max-width: 300px;
+    animation: float 6s ease-in-out infinite;
+}
+
+
+
+
+/* 1. حركة الطفو للصورة - جعلناها أكثر انسيابية بـ 25px */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+        filter: drop-shadow(0 5px 15px rgba(184, 158, 110, 0.2)); /* ظل خفيف ملتصق بالبوتل */
+    }
+    50% {
+        transform: translateY(-25px); /* أقصى ارتفاع */
+        filter: drop-shadow(0 20px 30px rgba(184, 158, 110, 0.1)); /* تشتت الظل الملتصق */
+    }
+}
+
+/* 2. حركة الظل الأرضي المتزامنة - التركيز على القوة والضعف */
+@keyframes shadowSync {
+    0%, 100% {
+        /* الحالة: الزجاجة في أقرب نقطة للأرض */
+        transform: scale(1.1);    /* الظل يكون في أكبر حجم له */
+        opacity: 0.8;            /* الظل يكون واضحاً وقوياً */
+        filter: blur(3px);       /* الحواف تكون أكثر حدة (أقل ضبابية) */
+    }
+    50% {
+        /* الحالة: الزجاجة في أبعد نقطة (في الهواء) */
+        transform: scale(0.6);    /* الظل ينكمش لأنه بعيد */
+        opacity: 0.15;           /* الظل يضعف جداً ويكاد يختفي */
+        filter: blur(12px);      /* الحواف تتشتت تماماً وتصبح ناعمة جداً */
+    }
+}
+
+/* تطبيق الحركات */
+.floating-3d-asset {
+    animation: float 4s ease-in-out infinite;
+    will-change: transform; /* لتحسين الأداء السلس */
+}
+
+.shadow-overlay {
+    width: 140px; /* صغرنا العرض الأساسي قليلاً ليكون متناسقاً */
+    height: 15px;
+    background: radial-gradient(ellipse at center, var(--primary-gold) 0%, transparent 75%);
+    margin: 30px auto 0;
+    
+    /* التأكد من استخدام نفس التوقيت بدقة */
+    animation: shadowSync 4s ease-in-out infinite;
+    
+    transform-origin: center;
+    mix-blend-mode: multiply; /* ليختلط لون الذهب مع خلفية الكريمي بشكل طبيعي */
+}
+
+
+.ritual-3d-content {
+    text-align: center;
+    margin-bottom: 100px; /* مسافة كبيرة قبل الـ 3D asset */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+.ritual-3d-content .section-title-gold {
+    font-family: var(--font-primary); /* الخط السيريف الفخم */
+    font-size: 3.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.3em; /* تباعد حروف كبير للفخامة */
+    color: var(--primary-gold);
+    margin-bottom: 30px;
+    display: block;
+    
+    /* تأثير إضاءة خفي على النص */
+    background: linear-gradient(to right, #b89e6e, #d4af37, #b89e6e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+}
+
+.ritual-3d-content p {
+    font-family: var(--font-secondary); /* الخط السانز البسيط */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5em; /* تباعد حروف واسع جداً */
+    color: var(--text-muted); /* لون كريمي غامق أو رمادي دافئ */
+    opacity: 0.7;
+    position: relative;
+    display: inline-block;
+}
+
+/* إضافة خط صغير جداً تحت النص لزيادة التركيز */
+.ritual-3d-content p::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 1px;
+    background: var(--primary-gold);
+    opacity: 0.5;
+}
+
+/* حركة لمعان النص الذهبي */
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+
+
+
+
+
+
+/* --- 5. Nature's Gems Section (The Infinite Stage) --- */
+
+.about-ingredients-grid {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    background-color: #F9F5F0; /* لون Lunara الأساسي */
+    padding: 120px 0;
+    position: relative;
+
+    /* 1. البلور الداخلي (Internal Blur) يطبق على القسم بالكامل */
+    -webkit-mask-image: linear-gradient(
+        to right, 
+        transparent 0%, 
+        black 15%, 
+        black 85%, 
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right, 
+        transparent 0%, 
+        black 15%, 
+        black 85%, 
+        transparent 100%
+    );
+}
+
+.ingredients-header {
+    text-align: center;
+    margin-bottom: 60px;
+    width: 100%;
+    z-index: 30; /* لضمان ظهور العنوان فوق الظلال */
+}
+
+/* 2. الظلال الجانبية القوية (Inner Shadows) مدمجة في القسم */
+.about-ingredients-grid::before,
+.about-ingredients-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25%; 
+    z-index: 20; /* فوق الصور وتحت العنوان */
+    pointer-events: none;
+}
+
+.about-ingredients-grid::before {
+    left: 0;
+    background: linear-gradient(to right, #F9F5F0 0%, rgba(249, 245, 240, 0) 100%);
+}
+
+.about-ingredients-grid::after {
+    right: 0;
+    background: linear-gradient(to left, #F9F5F0 0%, rgba(249, 245, 240, 0) 100%);
+}
+
+.macro-gallery-loop {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content; 
+    gap: 40px; 
+    padding: 100px 0;
+    position: relative;
+    justify-content: flex-start !important; 
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+/* الكارت الفردي */
+.ingredient-card {
+    position: relative;
+    flex: 0 0 450px; 
+    width: 450px;
+    height: 580px; 
+    border-radius: 40px; 
+    overflow: hidden;
+    background-color: #F9F5F0;
+    /* منع أي انتقال CSS يتعارض مع GSAP */
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    
+    /* حل الرمش والاهتزاز */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+.ingredient-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+    filter: saturate(1.05) contrast(1.02);
+}
+
+.ingredient-card:hover img {
+    transform: scale(1.12);
+}
+
+/* تأثير الـ Vignette الداخلي لكل كارت */
+.ingredient-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.6s ease;
+}
+
+.ingredient-card:hover::after {
+    opacity: 0.2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 6. Call to Action: The Cinematic Reveal (Statement Style) --- */
+
+.about-cta-section {
+    min-height: 100vh; /* ارتفاع كامل ليعطي تأثير الـ Fixed حقّه */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 10%;
+    position: relative;
+    overflow: hidden;
+
+    /* إعدادات الصورة الخلفية (نفس تكنيك الـ Statement) */
+    /* التدرج اللوني هنا يضمن دمج الصورة مع لون الموقع الكريمي */
+    background-image: linear-gradient(
+        to bottom, 
+        rgba(249, 245, 240, 0.473), 
+        rgba(249, 245, 240, 0.515)
+    ), 
+    url('/cta-crystal-image.png'); /* صورتك الشفافة هنا */
+
+    background-size: contain; /* نستخدم contain إذا أردنا رؤية القطعة كاملة أو cover للملء */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* التأثير السينمائي: الصورة ثابتة والنص يتحرك */
+}
+
+/* التظليل العلوي والسفلي لدمج السيكشن بنعومة مع ما قبله وما بعده */
+.about-cta-section::before,
+.about-cta-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 200px; /* زيادة الارتفاع لنعومة أكثر */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.about-cta-section::before {
+    top: 0;
+    background: linear-gradient(to bottom, #F9F5F0, transparent);
+}
+
+.about-cta-section::after {
+    bottom: 0;
+    background: linear-gradient(to top, #F9F5F0, transparent);
+}
+
+/* تنسيق المحتوى الداخلي ليكون فوق طبقات الخلفية */
+.cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.cta-title {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 300;
+    color: var(--primary-gold); /* توحيد اللون الذهبي */
+}
+
+.cta-subtitle {
+    font-family: var(--font-secondary);
+    color: #4a4a4a; /* لون داكن للقراءة فوق الكريمي */
+    font-size: 1.2rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    opacity: 0.9;
+}
+
+/* تنسيق الزر الذهبي الفخم */
+.btn-gold-outline {
+    padding: 22px 60px;
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    background: transparent;
+    color: var(--primary-gold);
+    border: 1px solid var(--primary-gold);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-gold-outline:hover {
+    background-color: var(--primary-gold);
+    color: #000;
+    box-shadow: 0 15px 40px rgba(184, 158, 110, 0.4);
+    transform: translateY(-5px);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* --- التعديلات الخاصة بالشاشات المتوسطة (1200px) --- */
+
+@media (max-width: 1200px) {
+    .about-story-section {
+        padding: 120px 0;
+    }
+
+    .about-container.grid-2-cols {
+        gap: 60px; /* تقليل الفجوة قليلاً للمساعدة في التوسيط */
+        grid-template-columns: 1fr 1fr;
+        
+        /* التوسيط الرأسي (من حيث الطول) */
+        align-items: center; 
+    }
+
+    .story-image-wrapper {
+        /* تحديد حجم أدنى للصورة لضمان عدم صغرها */
+        min-width: 480px; 
+        max-width: 550px;
+        /* لضمان بقائها في المنتصف تماماً داخل حاويتها */
+        display: flex;
+        justify-content: center;
+    }
+
+    .reveal-img {
+        box-shadow: 20px 20px 0px var(--secondary-cream);
+    }
+
+    .reveal-img:hover {
+        box-shadow: 30px 30px 0px var(--secondary-cream);
+    }
+
+    .section-title-gold {
+        font-size: 3.2rem;
+        margin-bottom: 25px;
+    }
+
+    .p-accent {
+        font-size: 1.4rem; /* تعديل طفيف للحجم */
+        margin-bottom: 20px;
+    }
+
+    .p-muted {
+        font-size: 1.1rem;
+        line-height: 1.8; /* تباعد مريح لكتلة النص */
+    }
+}
+
+@media (max-width: 1025px) {
+    /* تثبيت أحجام نصوص الهيرو */
+    .about-main-title {
+        font-size: 5.5rem !important; /* حجم ثابت لا يتغير مع صغر الشاشة */
+        line-height: 1;
+    }
+
+    .subtitle-gold {
+        font-size: 0.9rem;
+        letter-spacing: 0.6em; /* تقليل بسيط للتباعد ليناسب العرض */
+        margin-bottom: 30px;
+    }
+
+    .bg-watermark {
+        font-size: 1.2em; /* تصغير العلامة المائية لتظل خلف النص فقط */
+    }
+    .about-container.grid-2-cols {
+        grid-template-columns: 1fr; /* تحويل لعمود واحد */
+        gap: 50px; /* فجوة متوازنة بين الصورة والنص */
+        justify-items: center; /* توسيط العناصر عرضياً */
+        text-align: center; /* توسيط النصوص */
+    }
+
+    .story-image-wrapper {
+        /* تثبيت حجم الصورة كما طلبت لضمان عدم صغرها */
+        min-width: 550px; 
+        max-width: 650px;
+        width: 80%; /* لضمان عدم خروجها عن الشاشة في الموديلات الأصغر */
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .reveal-img {
+        width: 100%;
+        height: auto;
+        /* الحفاظ على الظل الصلب الفخم */
+        box-shadow: 25px 25px 0px var(--secondary-cream);
+    }
+
+    .story-text-content {
+        max-width: 650px; /* عرض مريح للقراءة في وضع العمود الواحد */
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+
+    .section-title-gold {
+        font-size: 3.5rem; /* حجم ثابت وواضح */
+        margin-bottom: 25px;
+    }
+
+    .p-accent {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .p-muted {
+        font-size: 1.2rem;
+        line-height: 1.9;
+        text-align: center; /* ضمان التوسط الكامل */
+    }
+
+    /* توسيط الرقم الخفي 01 خلف النص */
+    .story-text-content::before {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -40px;
+    }
+}
+
+
+
+
+/* --- Proportional Scaling for Small Tablets (850px) --- */
+
+@media (max-width: 850px) {
+    /* 1. تقليل المسافات العامة للسيكشنز */
+    .about-story-section, 
+    .about-pillars-section, 
+    .about-ingredients-grid {
+        padding: 80px 0 !important;
+    }
+
+    /* 2. الهيرو - Hero Section */
+    .about-main-title {
+        font-size: 4rem !important; /* تصغير العنوان الرئيسي */
+    }
+    
+    .subtitle-gold {
+        font-size: 0.8rem;
+        letter-spacing: 0.4em; /* تقليل التباعد قليلاً */
+        margin-bottom: 20px;
+    }
+
+
+
+
+
+
+
+    /* 3. سيكشن القصة - Story Section */
+    .section-title-gold {
+        font-size: 2.8rem !important;
+        
+    }
+
+    .story-image-wrapper {
+        min-width: 90% !important; /* تأخذ معظم عرض الشاشة */
+        max-width: 450px !important; /* تصغير الحد الأقصى */
+    }
+
+    .reveal-img {
+        box-shadow: 15px 15px 0px var(--secondary-cream) !important; /* تصغير الظل الصلب */
+    }
+
+    .p-accent {
+        font-size: 1.3rem !important;
+    }
+
+    .p-muted {
+        font-size: 1rem !important;
+        line-height: 1.7 !important;
+    }
+
+
+    
+    /* 4. الركائز - Pillars Section */
+
+
+
+    .pillar-card {
+        max-width: 400px !important;
+        padding: 40px 30px !important;
+     
+  
+    }
+    .pillars-wrapper {
+    height: 1200px; /* الارتفاع الذي حددته */
+    display: flex;
+    flex-direction: column;
+    
+    /* هذا السطر سيقوم بتوزيع الكروت الثلاثة: 
+       واحد في القمة، واحد في المنتصف، وواحد في القاع تماماً */
+    justify-content: space-between; 
+    
+    align-items: center; /* لتوسط الكروت عرضياً */
+    position: relative;
+  
+}
+
+/* استهداف الكارت الأخير لضمان التصاقه بالقاع حتى لو تغير الارتفاع */
+.pillar-card:last-child {
+    align-self: center; /* أو flex-end إذا كنت تريد إزاحته لليمين */
+    margin-bottom: 0; /* إلغاء أي هوامش سفلية */
+}
+
+    .pillar-card h3 {
+        font-size: 2rem !important;
+        
+    }
+
+    .pillar-number {
+        font-size: 5rem !important; /* تصغير الرقم الخلفي */
+    }
+
+    .pillars-wrapper {
+        gap: 80px !important; /* تقليل الفجوة الرأسية بين الكروت */
+    }
+
+    /* 5. المكونات - Ingredients Loop */
+    .ingredient-card {
+        flex: 0 0 300px !important; /* تصغير عرض الكروت في اللوب */
+        height: 420px !important;
+    }
+
+
+
+
+
+
+.ritual-3d-content p {
+   width: 500px;
+}
+
+.ingredients-header{
+  
+    margin-bottom: 0;
+}
+}
+
+
+
+/* --- Ultra-Compact Scaling for Mobile (550px) --- */
+
+@media (max-width: 550px) {
+    /* 1. تصغير المسافات الرأسية للسيكشنز */
+    .about-story-section, 
+    .about-pillars-section, 
+    .about-ingredients-grid,
+    .about-ritual-3d {
+        padding: 50px 0 !important;
+    }
+
+    /* 2. الهيرو - Hero Section */
+    .about-main-title {
+        font-size: 3.1rem !important; /* تصغير العنوان ليتناسب مع عرض الموبايل */
+    }
+    
+    .subtitle-gold {
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        margin-bottom: 15px;
+    }
+
+    .bg-watermark {
+        font-size: 0.9em; /* تصغير العلامة المائية */
+    }
+
+    /* 3. سيكشن القصة - Story Section */
+    .section-title-gold {
+        font-size: 2.1rem !important;
+    }
+
+    .story-image-wrapper {
+        min-width: 100% !important;
+        max-width: 300px !important; /* تصغير عرض حاوية الصورة */
+    }
+
+    .reveal-img {
+        box-shadow: 12px 12px 0px var(--secondary-cream) !important; /* تصغير الظل */
+    }
+
+    .p-accent {
+        font-size: 1.1rem !important;
+    }
+
+    .p-muted {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+    }
+
+
+
+    /* 4. الركائز - Pillars Section */
+    .pillars-wrapper {
+        height: 900px; /* تصغير الارتفاع الكلي ليناسب الأحجام الجديدة */
+        gap: 40px !important;
+    }
+
+    .pillar-card {
+        max-width: 300px !important; /* تصغير عرض الكارت */
+        padding: 25px 20px !important; /* تقليل المسافات الداخلية */
+    }
+
+    .pillar-card h3 {
+        font-size: 1.5rem !important;
+    }
+
+    .pillar-card p {
+        font-size: 0.95rem !important;
+    }
+
+    .pillar-number {
+        font-size: 3.5rem !important; /* تصغير الرقم الخلفي */
+    }
+
+
+
+    /* 5. المكونات - Ingredients Loop */
+    .ingredient-card {
+        flex: 0 0 240px !important; /* تصغير عرض الكروت في اللوب */
+        height: 350px !important;
+    }
+
+
+    /* 6. قسم الـ 3D Ritual */
+.ritual-3d-content p {
+   width: 500px;
+}
+
+.ingredients-header{
+  
+    margin-bottom: -20px;
+
+}
+
+    .floating-3d-asset {
+        max-width: 220px !important; /* تصغير المنتج الطافي */
+    }
+
+
+
+    /* 7. سيكشن الـ CTA الأخير */
+    .cta-title {
+        font-size: 1.8rem !important;
+    }
+
+    .cta-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 30px;
+    }
+
+    .btn-gold-outline {
+        padding: 12px 30px !important;
+        font-size: 0.8rem !important;
+    }
+
+}
+
+@media (max-width: 550px) {
+    /* استهداف سيكشن الـ Ritual فقط */
+    .ritual-3d-content .section-title-gold {
+        font-size: 1.8rem !important; /* تصغير العنوان الذهبي هنا فقط */
+        letter-spacing: 0.15em !important; /* تقليل التباعد ليناسب الشاشة */
+        margin-bottom: 15px;
+    }
+
+    .ritual-3d-content p {
+        font-size: 0.8rem !important; /* تصغير النص المساعد */
+        letter-spacing: 0.2em !important;
+        width: 70% !important; /* التأكد من أنه لا يخرج عن الحواف */
+       
+    }
+
+    /* إضافة لمسة احترافية للمسافة الفاصلة بين العنوان والـ 3D asset */
+    .ritual-3d-content {
+        margin-bottom: 50px !important; 
+    }
+}
+@media (max-width: 550px) {
+    /* 1. تقليل المسافة بين الصور */
+    .macro-gallery-loop {
+        gap: 15px !important; /* مسافة ضيقة وأنيقة */
+        padding: 30px 0 !important; /* تقليل البادينج الرأسي */
+    }
+
+    /* 2. زيادة عرض الصورة (الكارت) */
+    .ingredient-card {
+        /* زيادة العرض ليكون أوضح على شاشة الموبايل */
+        flex: 0 0 280px !important; 
+        height: 380px !important; /* الحفاظ على تناسق الطول مع العرض الجديد */
+        border-radius: 20px !important; /* تنعيم الحواف لتناسب الحجم الأصغر */
+    }
+
+    /* تحسين إضافي: جعل التظليل الجانبي للـ loop أخف ليناسب المسافات الضيقة */
+    .macro-gallery-loop::before,
+    .macro-gallery-loop::after {
+        width: 15% !important; 
+    }
+}
+
+

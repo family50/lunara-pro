@@ -1,0 +1,95 @@
+.footer-section {
+    background-color: var(--secondary-cream); /* خلفية أغمق قليلاً من الرئيسية للتمييز */
+    padding: 80px 5% 40px;
+    border-top: 1px solid rgba(140, 109, 57, 0.2); /* خط ذهبي خفيف جداً في الأعلى */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* شعار الشركة وتنسيقه */
+.developer-logo {
+    width: 70px; /* حجم صغير وراقي */
+    height: auto;
+    margin-bottom: 15px;
+    filter: grayscale(0) brightness(1); /* لضمان ظهور اللون الذهبي للوجو */
+}
+
+.developer-title {
+    font-family: var(--font-primary);
+    color: var(--primary-gold);
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.developer-tagline {
+    font-family: var(--font-secondary);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* معلومات المشروع */
+.footer-project-info {
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+.project-statement {
+    font-family: var(--font-secondary);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.brand-name {
+    color: var(--primary-gold);
+    font-weight: bold;
+    font-family: var(--font-primary);
+}
+
+/* أيقونات التواصل الاجتماعي */
+.footer-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.social-icon {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: all 0.4s ease;
+}
+
+.social-icon:hover {
+    color: var(--primary-gold);
+    transform: translateY(-5px);
+}
+
+/* خط الحقوق النهائي */
+.footer-bottom-line {
+    border-top: 1px solid rgba(98, 77, 63, 0.1);
+    padding-top: 25px;
+}
+
+.footer-bottom-line p {
+    font-family: var(--font-secondary);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 850px){
+    .footer-section{
+      margin-bottom: 40px;
+    }
+}

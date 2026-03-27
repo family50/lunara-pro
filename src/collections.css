@@ -14,6 +14,7 @@
   /* إضافة ملمس خفيف جداً للخلفية */
   background-image: radial-gradient(var(--secondary-cream) 0.5px, transparent 0.5px);
   background-size: 40px 40px;
+  margin-top: 130px;
 }
 
 /* Header Section - لم يتم تغيير أي شيء حسب طلبك */
@@ -383,6 +384,7 @@ height: 450px;
 @media (max-width: 850px) {
   .collections-container {
     padding: 0px 5% 80px; /* زيادة الهوامش الجانبية قليلاً */
+      margin-top: 100px;
   }
 
   .collections-header {
@@ -444,6 +446,7 @@ display: none;
   .collections-container {
     padding: 0px 6% 60px; /* تقليل البادينج قليلاً لزيادة مساحة الصورة */
   margin-bottom: 20px;
+   margin-top: 90px;
 }
 
   .collections-header {
