@@ -4,12 +4,27 @@ const Loading = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // التأثير: إخفاء اللودر تماماً بعد ثانيتين
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 2000);
+    // 1. تحديد الحد الأدنى للوقت (ثانيتين) لإعطاء هيبة للبراند
+    const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 2000));
 
-    return () => clearTimeout(timer);
+    // 2. تحديد وقت انتهاء تحميل كافة عناصر الصفحة (صور، فيديوهات، ملفات)
+    const pageLoaded = new Promise((resolve) => {
+      if (document.readyState === 'complete') {
+        resolve(true);
+      } else {
+        window.addEventListener('load', resolve);
+      }
+    });
+
+    // 3. الانتظار حتى يتحقق الشرطين معاً
+    Promise.all([minDisplayTime, pageLoaded]).then(() => {
+      // إضافة ثانية إضافية "نعومة" بعد التحميل الفعلي
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 500); 
+    });
+
+    return () => window.removeEventListener('load', () => {});
   }, []);
 
   if (!isVisible) return null;
