@@ -77,3 +77,14 @@ body {
   
 }
 
+/* للتعديل على المتصفحات الحديثة (Chrome, Edge, Safari) */
+::selection {
+    background-color: var(--bg-cream); /* الخلفية ستكون الذهبي الملكي */
+    color: var(--primary-gold);               /* النص سيتحول للون الكريمي الفاتح */
+}
+
+/* للمتصفحات القديمة مثل Firefox */
+::-moz-selection {
+      background-color: var(--bg-cream); /* الخلفية ستكون الذهبي الملكي */
+    color: var(--primary-gold); 
+}
