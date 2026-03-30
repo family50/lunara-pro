@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useLayoutEffect, useState } from "react";
+import  { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { discoverMoreProducts } from './Discover-More';
 import gsap from "gsap";
