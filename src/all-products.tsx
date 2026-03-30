@@ -70,6 +70,8 @@ function AllProducts() {
     const filterWrapperRef = useRef<HTMLDivElement>(null);
 
     const params = new URLSearchParams(location.search);
+    const initialPage = parseInt(params.get("page") || "1");
+    const [currentPage, setCurrentPage] = useState(initialPage);
     const sectionKey = params.get("section") || location.state?.sectionKey;
     
     const sectionData = sectionKey ? (discoverMoreProducts as unknown as DiscoverMoreData)[sectionKey] : null;
@@ -77,31 +79,24 @@ function AllProducts() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [activeFilter, setActiveFilter] = useState("Most Popular");
 
-    // --- نظام الصفحات الديناميكي (Pagination) ---
-    const [currentPage, setCurrentPage] = useState(1);
-
     const getProductsPerPage = () => {
         const width = window.innerWidth;
-        if (width > 1200) return 9;  // 3 أعمدة * 3 صفوف
-        if (width <= 1200 && width > 768) return 6; // عمودين * 3 صفوف
-        return 4; // موبايل
+        if (width > 1200) return 9;
+        if (width <= 1200 && width > 768) return 6;
+        return 4;
     };
 
-    const [productsPerPage, setProductsPerPage] = useState(getProductsPerPage());
+    const productsPerPage = getProductsPerPage();
 
     useEffect(() => {
-        const handleResize = () => {
-            setProductsPerPage(getProductsPerPage());
-            
-        };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+        const newParams = new URLSearchParams(location.search);
+        newParams.set("page", currentPage.toString());
+        navigate({ search: newParams.toString() }, { replace: true });
+    }, [currentPage, navigate, location.search]);
 
     const bgColor = sectionData?.theme?.light || "#ffffff";
     const thumbColor = sectionData?.theme?.dark || "#000000";
 
-    // --- 1. الترتيب باستخدام useMemo ---
     const sortedProducts = useMemo<Product[]>(() => {
         if (!sectionData?.products) return [];
         const productsCopy = [...sectionData.products];
@@ -114,7 +109,6 @@ function AllProducts() {
         }
     }, [activeFilter, sectionData]);
 
-    // حساب المنتجات المعروضة حالياً
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -125,19 +119,19 @@ function AllProducts() {
         if (!sectionData) return;
 
         const ctx = gsap.context(() => {
-            // أنميشن الهيرو
+            // Hero Animation
             gsap.fromTo(imgRef.current, 
-                { y: -100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" }
+                { y: -50, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
             );
 
             const validTextElements = textRef.current.filter(Boolean);
             gsap.fromTo(validTextElements, 
-                { y: -50, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1.2, stagger: 0.3, ease: "power3.out", delay: 0.5 }
+                { y: 30, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }
             );
 
-            // أنميشن Best Seller (Infinite Loop)
+            // Best Seller Loop
             const cards = cardsContainerRef.current;
             if (cards) {
                 const totalWidth = cards.scrollWidth;
@@ -149,37 +143,36 @@ function AllProducts() {
                     repeat: -1,
                     modifiers: { x: gsap.utils.unitize(val => parseFloat(val) % halfWidth) }
                 });
-                cards.addEventListener("mouseenter", () => loop.pause());
-                cards.addEventListener("mouseleave", () => loop.play());
+                cards.onmouseenter = () => loop.pause();
+                cards.onmouseleave = () => loop.play();
             }
 
-            // --- أنميشن كروت المنتجات (الظهور والاختفاء المتكرر) ---
-           const productCards = gsap.utils.toArray<Element>(".product-card-dark");
-            productCards.forEach((card) => {
-                gsap.fromTo(card, 
-                    { opacity: 0, y: 50, scale: 0.95 },
+            // Products Grid Animation - الحل النهائي للرعشة والألوان
+            const productCards = gsap.utils.toArray<HTMLElement>(".product-card-dark");
+            if (productCards.length > 0) {
+                // بدلاً من مسح كل شيء، نمسح فقط الخصائص اللي بنعملها أنميشن عشان نحافظ على الألوان
+                gsap.set(productCards, { clearProps: "opacity,y,scale,transform" });
+
+                gsap.fromTo(productCards, 
+                    { opacity: 0, y: 20, scale: 0.98 },
                     { 
                         opacity: 1, 
                         y: 0, 
-                        scale: 1,
-                        duration: 0.8,
+                        scale: 1, 
+                        duration: 0.4, 
+                        stagger: 0.03, 
                         ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 95%", // يبدأ عندما يظهر 5% من الكارت
-                            end: "bottom 5%",  // يختفي عند خروجه
-                            toggleActions: "play reverse play reverse" // تكرار الأنميشن دخولاً وخروجاً
+                        overwrite: true,
+                        onComplete: () => {
+                            ScrollTrigger.refresh(); // تحديث الحسابات بعد ظهور المنتجات
                         }
                     }
                 );
-            });
-
+            }
         }, mainRef);
 
         return () => ctx.revert();
-    }, [sectionData, currentProducts]); // يتم التحديث عند تغيير المنتجات في الصفحة
-
-   
+    }, [currentPage, activeFilter, sectionData]); // الأنميشن يشتغل مع كل تغيير داتا
 
     const filterOptions = [
         { id: "popular", label: "Most Popular" },
@@ -203,6 +196,8 @@ function AllProducts() {
                     .page-btn { transition: all 0.3s ease; border: 1px solid ${thumbColor}; }
                     .page-btn.active { background-color: ${thumbColor} !important; color: ${bgColor} !important; transform: scale(1.1); }
                     .page-btn:hover:not(.active) { background-color: ${thumbColor}22; }
+                    /* منع أي Transition CSS يتعارض مع GSAP */
+                    .product-card-dark { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
                 `}
             </style>
 
@@ -234,22 +229,22 @@ function AllProducts() {
                                     </div>
                                     <p className="p-price">${product.price}</p>
                                 </div>
-                               <NavLink 
-                        to="/one-product" 
-                        state={{ productId: product.id, sectionKey: sectionKey }}
-                        className="explore-btn2" 
-                        style={{ 
-                            backgroundColor: thumbColor, 
-                            color: bgColor, 
-                            boxShadow: `0 10px 30px ${thumbColor}66`,
-                            textDecoration: 'none', // لإزالة الخط تحت النص
-                            display: 'flex',       // لضمان توسط النص
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        Explore More
-                    </NavLink>
+                                <NavLink 
+                                    to="/one-product" 
+                                    state={{ productId: product.id, sectionKey: sectionKey }}
+                                    className="explore-btn2" 
+                                    style={{ 
+                                        backgroundColor: thumbColor, 
+                                        color: bgColor, 
+                                        boxShadow: `0 10px 30px ${thumbColor}66`,
+                                        textDecoration: 'none',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    Explore More
+                                </NavLink>
                             </div>
                         ))}
                     </div>
@@ -264,7 +259,7 @@ function AllProducts() {
                         <i className={`fa-solid fa-chevron-down arrow-icon ${isDropdownOpen ? 'rotate' : ''}`} style={{color: bgColor}}></i>
                     </button>
                     {isDropdownOpen && (
-                        <ul className="filter-dropdown" style={{ backgroundColor: bgColor, border: `1px solid ${thumbColor}44` }}>
+                        <ul className="filter-dropdown" style={{ backgroundColor: bgColor, border: `1px solid ${thumbColor}44`, zIndex: 10 }}>
                             {otherOptions.map((option) => (
                                 <li key={option.id} className="filter-option" style={{ color: thumbColor }} onClick={() => { setActiveFilter(option.label); setIsDropdownOpen(false); setCurrentPage(1); }}>
                                     {option.label}
@@ -275,55 +270,39 @@ function AllProducts() {
                 </div>
             </div>
             
-           <div className="all-products-grid" ref={allProductsGridRef}>
-    {currentProducts.map((product) => (
-        <div 
-            key={product.id} 
-            className="product-card-dark" 
-            style={{ 
-                backgroundColor: thumbColor, 
-                cursor: 'pointer' // جعل المؤشر يتغير ليد عند الوقوف على الكارت
-            }}
-            // عند الضغط على أي مكان في الكارت
-            onClick={() => navigate("/one-product", { 
-                state: { productId: product.id, sectionKey: sectionKey } 
-            })}
-        >
-            <div className="p-card-img-wrapper">
-                <img src={product.image} alt={product.name} className="p-card-img" />
-                
-                {/* تم تعديل NavLink إلى Div بسيط أو إزالته لأن الكارت كله صار رابطاً */}
-                <div 
-                    className="explore-btn3" 
-                    style={{ 
-                        backgroundColor: thumbColor, 
-                        color: bgColor,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                >
-                    Explore
-                </div>
-            </div>
+            <div className="all-products-grid" ref={allProductsGridRef} key={`${currentPage}-${activeFilter}`}>
+                {currentProducts.map((product) => (
+                    <div 
+                        key={product.id} 
+                        className="product-card-dark" 
+                        style={{ backgroundColor: thumbColor, cursor: 'pointer' }}
+                        onClick={() => navigate("/one-product", { 
+                            state: { productId: product.id, sectionKey: sectionKey } 
+                        })}
+                    >
+                        <div className="p-card-img-wrapper">
+                            <img src={product.image} alt={product.name} className="p-card-img" />
+                            <div className="explore-btn3" style={{ backgroundColor: thumbColor, color: bgColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                Explore
+                            </div>
+                        </div>
 
-            <div className="p-card-details" style={{ color: bgColor }}>
-                <h3 className="p-card-name">{product.name}</h3>
-                <div className="p-card-footer">
-                    <div className="p-card-rating">
-                        {"★".repeat(Math.floor(product.Evaluation))}
-                        <span className="p-card-purchases" style={{ opacity: 0.7 }}>
-                            ({product.Purchasing})
-                        </span>
+                        <div className="p-card-details" style={{ color: bgColor }}>
+                            <h3 className="p-card-name">{product.name}</h3>
+                            <div className="p-card-footer">
+                                <div className="p-card-rating">
+                                    {"★".repeat(Math.floor(product.Evaluation))}
+                                    <span className="p-card-purchases" style={{ opacity: 0.7 }}>
+                                        ({product.Purchasing})
+                                    </span>
+                                </div>
+                                <p className="p-card-price">${product.price}</p>
+                            </div>
+                        </div>
                     </div>
-                    <p className="p-card-price">${product.price}</p>
-                </div>
+                ))}
             </div>
-        </div>
-    ))}
-</div>
 
-            {/* نظام أرقام الصفحات */}
             {totalPages > 1 && (
                 <div className="pagination-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '15px', padding: '40px 0' }}>
                     <button 
