@@ -92,7 +92,7 @@ function AllProducts() {
     useEffect(() => {
         const handleResize = () => {
             setProductsPerPage(getProductsPerPage());
-            setCurrentPage(1); // إعادة التعيين عند تغيير الحجم لضمان ثبات التصميم
+            
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
