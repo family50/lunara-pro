@@ -1,9 +1,10 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import  { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './about.css';
 import Footer from './footer';
 import {  NavLink } from 'react-router-dom';
+
 // تسجيل الـ Plugin الخاص بالسكروول
 gsap.registerPlugin(ScrollTrigger);
 
