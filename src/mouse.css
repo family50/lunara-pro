@@ -1,8 +1,21 @@
 /* --- 1. إعدادات النظام --- */
 
 /* إخفاء الماوس الأصلي في أجهزة الكمبيوتر */
+/* --- 1. إعدادات النظام القوية --- */
+
 @media (pointer: fine) {
-  html, body, a, button, input, select, textarea {
+  /* نستخدم النجمة * لضمان وصول التأثير لكل العناصر بلا استثناء */
+  *, 
+  *::before, 
+  *::after,
+  html, 
+  body, 
+  a, 
+  button, 
+  input, 
+  select, 
+  textarea,
+  [role="button"] {
     cursor: none !important;
   }
 }

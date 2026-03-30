@@ -183,6 +183,47 @@ function AllProducts() {
 
     const otherOptions = filterOptions.filter(opt => opt.label !== activeFilter);
     const lines = sectionData?.theme?.Motivation.split("\n") || [];
+   
+   
+   
+// 1. تعريف الدالة خارج الـ Effect لتكون متاحة للـ JSX
+const handleProductClick = (productId: number) => {
+    // حفظ السكرول قبل الانتقال
+    sessionStorage.setItem(`scroll-${sectionKey}`, window.scrollY.toString());
+    navigate("/one-product", { 
+        state: { productId, sectionKey } 
+    });
+};
+
+// 2. منطق استعادة السكرول
+useLayoutEffect(() => {
+    const scrollKey = `scroll-${sectionKey}`;
+
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
+
+    const savedScrollPos = sessionStorage.getItem(scrollKey);
+    
+    if (savedScrollPos) {
+        // العودة من صفحة منتج: اذهب للمكان المحفوظ
+        window.scrollTo(0, parseInt(savedScrollPos));
+        sessionStorage.removeItem(scrollKey); 
+    } else {
+        // دخول جديد: اصعد للأعلى
+        window.scrollTo(0, 0);
+    }
+
+    // تهيئة GSAP و ScrollTrigger
+    const ctx = gsap.context(() => {
+        ScrollTrigger.clearScrollMemory();
+        ScrollTrigger.refresh();
+    }, mainRef);
+
+    return () => ctx.revert();
+    
+    // أضفنا sectionData و navigate هنا لإرضاء ESLint وضمان الدقة
+}, [sectionKey, sectionData, navigate]);
 
     return (
         <div ref={mainRef} className="all-productssss" style={{ backgroundColor: bgColor }}>
@@ -276,9 +317,7 @@ function AllProducts() {
                         key={product.id} 
                         className="product-card-dark" 
                         style={{ backgroundColor: thumbColor, cursor: 'pointer' }}
-                        onClick={() => navigate("/one-product", { 
-                            state: { productId: product.id, sectionKey: sectionKey } 
-                        })}
+                       onClick={() => handleProductClick(product.id)}
                     >
                         <div className="p-card-img-wrapper">
                             <img src={product.image} alt={product.name} className="p-card-img" />
