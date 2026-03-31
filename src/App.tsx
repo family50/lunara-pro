@@ -21,7 +21,7 @@ import Loading from "./loding";
 function AppContent() {
   const location = useLocation();
   
-  // اللودر بيبدأ true دائماً في أول دخلة
+  // خلّي القيمة الابتدائية true دايماً
   const [isEntryLoading, setIsEntryLoading] = useState(true);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
@@ -29,26 +29,29 @@ function AppContent() {
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
 
   useEffect(() => {
-    // لو حملنا مرة خلاص، مش هنشغل اللودر تاني أبداً عند التنقل
     if (hasLoadedOnce) return;
 
     const loadCriticalAssets = async () => {
       try {
-        // سطر الـ await ده هو "مفتاح الصبر"
-        // مش هيعدي للسطر اللي بعده غير لما AssetManager يقول "كله تمام"
-        // حتى لو قعد سنة بيحمل
+        // 1. نضمن إن اللودر بدأ فعلاً قبل أي عمليات ثقيلة
+        setIsEntryLoading(true);
+
+        // 2. انتظر تحميل الأصول (فيديو، صور)
         await AssetManager.loadRouteAssets(location.pathname);
         
-        // أول ما يخلص التحميل فوراً:
-        setIsEntryLoading(false); // اخفي اللودر فورا
-        setHasLoadedOnce(true);   // سجل إننا خلصنا أول مرة
+        // 3. (اختياري) إضافة تأخير بسيط جداً (مثلاً 100ms) 
+        // لضمان أن المتصفح قام بعمل Render لصفحة الهوم خلف الكواليس
+        await new Promise(resolve => setTimeout(resolve, 100));
 
-        // ابدأ حمل باقي الموقع (Collections, About, الخ) في صمت من غير ما تعطل المستخدم
+        // 4. أول ما يخلص التحميل:
+        setIsEntryLoading(false);
+        setHasLoadedOnce(true);
+
+        // تحميل الباقي في الخلفية
         AssetManager.loadEverythingElse();
 
       } catch (error) {
         console.error("Critical Assets failed to load", error);
-        // حتى لو حصل فشل، بنفتح الموقع بعد فترة عشان ميفضلش معلق
         setIsEntryLoading(false);
         setHasLoadedOnce(true);
       }
@@ -59,7 +62,7 @@ function AppContent() {
 
   return (
     <>
-      {/* شاشة اللودينج تظهر فقط في البداية */}
+      {/* تأكد إن مكون Loading واخد z-index: 9999 في الـ CSS بتاعه */}
       {isEntryLoading && <Loading />}
       
       <ScrollToTop />
@@ -67,11 +70,9 @@ function AppContent() {
       {!shouldHideHeader && <Header />}
       
       <Suspense fallback={null}> 
-        {/* visibility: hidden تضمن إن الهوم مرسومة وجاهزة في الخلفية بس مستنية اللودر يختفي */}
         <div style={{ 
-          visibility: (isEntryLoading && !hasLoadedOnce) ? 'hidden' : 'visible',
-          opacity: (isEntryLoading && !hasLoadedOnce) ? 0 : 1,
-          transition: 'opacity 0.5s ease' // اختيار اختياري لنعومة الظهور
+          // لو لسه بيحمل لأول مرة، اخفي المحتوى تماماً
+          display: (isEntryLoading && !hasLoadedOnce) ? 'none' : 'block'
         }}>
           <Routes>
             <Route path="/" element={<Home />} />
