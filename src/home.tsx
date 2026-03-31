@@ -23,7 +23,7 @@ const Home: React.FC = () => {
 
             gsap.fromTo(".hero-video-bg", 
                 { opacity: 0, scale: 1.1 }, 
-                { opacity: 1, scale: 1, duration: 3, ease: "power2.out" }
+                { opacity: 1, scale: 1, duration: 2.5, ease: "power2.out" }
             );
 
             gsap.fromTo(".hero-geometric-shape", 
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
                     opacity: 1, 
                     scale: 1, 
                     filter: "blur(2px)", 
-                    duration: 1, 
+                    duration: 0.8, 
                     delay: 0.2, 
                     stagger: 0.4, 
                     ease: "power3.out" 
@@ -196,7 +196,6 @@ statementTl
             <section className="hero-section">
                 <div className="hero-overlay"></div>
                 <LuxeMedia 
-                
                     src="/02177426498432500000000000000000000ffffc0a8981cd0b0f4.mp4" 
                     autoPlay loop muted playsInline
                     className="hero-video-bg" 

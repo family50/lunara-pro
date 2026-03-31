@@ -21,51 +21,45 @@ import Loading from "./loding";
 function AppContent() {
   const location = useLocation();
   
-  // الحالة دي بتتحكم في اللودر الكبير
+  // اللودر بيبدأ true دائماً في أول دخلة
   const [isEntryLoading, setIsEntryLoading] = useState(true);
-  // الحالة دي بتضمن إن اللودر يشتغل "أول مرة فقط"
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
   const hideHeaderPaths = ["/all-products", "/one-product", "/payment"];
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
 
   useEffect(() => {
-    // لو تم التحميل أول مرة، اخرج من الـ Effect ومتحملش لودر تاني
+    // لو حملنا مرة خلاص، مش هنشغل اللودر تاني أبداً عند التنقل
     if (hasLoadedOnce) return;
 
-    const loadAssets = async () => {
+    const loadCriticalAssets = async () => {
       try {
-        const startTime = Date.now();
-
-        // انتظر تحميل الميديا الأساسية لأول صفحة يفتحها المستخدم (غالباً الهوم)
+        // سطر الـ await ده هو "مفتاح الصبر"
+        // مش هيعدي للسطر اللي بعده غير لما AssetManager يقول "كله تمام"
+        // حتى لو قعد سنة بيحمل
         await AssetManager.loadRouteAssets(location.pathname);
         
-        const elapsedTime = Date.now() - startTime;
-        const minimumWait = 2000; // ثانيتين لضمان ظهور اللوجو بفخامة
+        // أول ما يخلص التحميل فوراً:
+        setIsEntryLoading(false); // اخفي اللودر فورا
+        setHasLoadedOnce(true);   // سجل إننا خلصنا أول مرة
 
-        const remainingWait = Math.max(0, minimumWait - elapsedTime);
-
-        setTimeout(() => {
-          setIsEntryLoading(false);
-          setHasLoadedOnce(true); // سجل إن أول تحميل خلص بنجاح
-          
-          // ابدأ سحب باقي الموقع في الخلفية "صامت"
-          AssetManager.loadEverythingElse();
-        }, remainingWait);
+        // ابدأ حمل باقي الموقع (Collections, About, الخ) في صمت من غير ما تعطل المستخدم
+        AssetManager.loadEverythingElse();
 
       } catch (error) {
-        console.error("Initial Assets failed to load", error);
+        console.error("Critical Assets failed to load", error);
+        // حتى لو حصل فشل، بنفتح الموقع بعد فترة عشان ميفضلش معلق
         setIsEntryLoading(false);
         setHasLoadedOnce(true);
       }
     };
 
-    loadAssets();
-  }, [hasLoadedOnce, location.pathname]); // الـ Effect ده هيركز على أول دخول فقط
+    loadCriticalAssets();
+  }, [hasLoadedOnce, location.pathname]);
 
   return (
     <>
-      {/* اللودر هيظهر فقط في أول دخول للموقع */}
+      {/* شاشة اللودينج تظهر فقط في البداية */}
       {isEntryLoading && <Loading />}
       
       <ScrollToTop />
@@ -73,8 +67,12 @@ function AppContent() {
       {!shouldHideHeader && <Header />}
       
       <Suspense fallback={null}> 
-        {/* ملحوظة: الـ Suspense هنا خليناه null أو لودر خفيف جداً عشان التنقل بين الصفحات يبقى سريع */}
-        <div style={{ visibility: (isEntryLoading && !hasLoadedOnce) ? 'hidden' : 'visible' }}>
+        {/* visibility: hidden تضمن إن الهوم مرسومة وجاهزة في الخلفية بس مستنية اللودر يختفي */}
+        <div style={{ 
+          visibility: (isEntryLoading && !hasLoadedOnce) ? 'hidden' : 'visible',
+          opacity: (isEntryLoading && !hasLoadedOnce) ? 0 : 1,
+          transition: 'opacity 0.5s ease' // اختيار اختياري لنعومة الظهور
+        }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/collections" element={<Collections />} />
