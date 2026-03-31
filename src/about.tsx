@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './about.css';
 import Footer from './footer';
 import {  NavLink } from 'react-router-dom';
-
+import LuxeMedia from './LuxeMedia';
 // تسجيل الـ Plugin الخاص بالسكروول
 gsap.registerPlugin(ScrollTrigger);
 
@@ -192,32 +192,46 @@ if (!mainRef.current || !pathRef.current) return;
     return (
         <main className="about-page-wrapper" ref={mainRef}>
             
-            {/* 1. قسم الهيرو: المانيفستو */}
-            <section className="about-hero">
-                <div className="about-hero-content">
-                    <div className="manifesto-badge">
-                        <span className="subtitle-gold">EST. 1447 — THE ART OF PURITY</span>
-                    </div>
-                    <div className="title-wrapper">
-                        <h1 className="about-main-title">
-                            Elegance <br /> 
-                            <span className="italic-gold">in its</span> Purest Form
-                        </h1>
-                        <span className="bg-watermark">LUNARA</span>
-                    </div>
-                </div>
-                <div className="hero-video-container">
-                    <video autoPlay loop muted playsInline className="hero-bg-video">
-                        <source src="./02177441816444200000000000000000000ffffc0a8981c53703f.mp4" type="video/mp4" />
-                    </video>
-                </div>
-            </section>
+       {/* 1. قسم الهيرو: المانيفستو */}
+<section className="about-hero">
+    <div className="about-hero-content">
+        <div className="manifesto-badge">
+            {/* EST. 1447 يعطي إيحاء بالعراقة الملكية التي تفضلها */}
+            <span className="subtitle-gold">EST. 1447 — THE ART OF PURITY</span>
+        </div>
+        
+        <div className="title-wrapper">
+            <h1 className="about-main-title">
+                Elegance <br /> 
+                <span className="italic-gold">in its</span> Purest Form
+            </h1>
+            {/* كلمة LUNARA في الخلفية تعزز الـ Branding الثقافي */}
+            <span className="bg-watermark">LUNARA</span>
+        </div>
+    </div>
+
+    {/* استخدام LuxeMedia هنا يضمن:
+        1. ظهور Skeleton فخم قبل تحميل الفيديو.
+        2. تحميل الفيديو من الـ Memory Cache مباشرة (Instant Play).
+    */}
+    <div className="hero-video-container">
+        <LuxeMedia 
+            src="/02177441816444200000000000000000000ffffc0a8981c53703f.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="hero-bg-video"
+            // المكون سيفهم تلقائياً أنه فيديو من الامتداد .mp4
+        />
+    </div>
+</section>
 
             {/* 2. قسم القصة: البداية */}
             <section className="about-story-section">
                 <div className="about-container grid-2-cols">
                     <div className="story-image-wrapper">
-                        <img src="./YOUR_STORY_IMAGE.png" alt="The Spark of Lunara" className="reveal-img" />
+                        <LuxeMedia src="./YOUR_STORY_IMAGE.png" alt="The Spark of Lunara" className="reveal-img" />
                     </div>
                     <div className="story-text-content">
                         <h2 className="section-title-gold">Our Origin</h2>
@@ -231,44 +245,68 @@ if (!mainRef.current || !pathRef.current) return;
                 </div>
             </section>
 
-            {/* 3. قسم الركائز: المسار الذهبي */}
-            <section className="about-pillars-section">
-                <svg className="pillars-path-svg" viewBox="0 0 1440 1800" fill="none" preserveAspectRatio="none">
-                    <path 
-                        ref={pathRef}
-                        className="path-line" 
-                        d="M720,0 C720,300 200,400 200,700 C200,1000 1240,1100 1240,1400 C1240,1600 720,1700 720,1800" 
-                    />
-                </svg>
-                <div className="about-container">
-                    <div className="pillars-wrapper">
-                        <div className="pillar-card p-left">
-                            <span className="pillar-number">01</span>
-                            <div className="pillar-content">
-                                <div className="pillar-icon-line"></div>
-                                <h3>Purity</h3>
-                                <p>Hand-selected ingredients from the world's rarest sustainable farms.</p>
-                            </div>
-                        </div>
-                        <div className="pillar-card p-right">
-                            <span className="pillar-number">02</span>
-                            <div className="pillar-content">
-                                <div className="pillar-icon-line"></div>
-                                <h3>Craft</h3>
-                                <p>Designing each bottle as a sculptural piece of art.</p>
-                            </div>
-                        </div>
-                        <div className="pillar-card p-center">
-                            <span className="pillar-number">03</span>
-                            <div className="pillar-content">
-                                <div className="pillar-icon-line"></div>
-                                <h3>Conscious</h3>
-                                <p>Luxury that respects the Earth and ethical transparency.</p>
-                            </div>
-                        </div>
-                    </div>
+{/* 3. قسم الركائز: المسار الذهبي (The Path of Lunara) */}
+<section className="about-pillars-section">
+    {/* الخط الترابي المتموج (The Earthy Silk Path) */}
+    <svg className="pillars-path-svg" viewBox="0 0 1440 1800" fill="none" preserveAspectRatio="none">
+        <path 
+            ref={pathRef}
+            className="path-line" 
+            d="M720,0 C720,300 200,400 200,700 C200,1000 1240,1100 1240,1400 C1240,1600 720,1700 720,1800" 
+        />
+    </svg>
+    
+    <div className="about-container">
+        <div className="pillars-wrapper">
+            
+            {/* الكارت الأول: Purity */}
+            <div className="pillar-card p-left">
+                <LuxeMedia 
+                    src="/YOUR_IMAGE_URL_FOR_PURITY.png" 
+                    className="pillar-bg-media" 
+                    alt="Purity Background"
+                />
+                <span className="pillar-number">01</span>
+                <div className="pillar-content">
+                    <div className="pillar-icon-line"></div>
+                    <h3>Purity</h3>
+                    <p>Hand-selected ingredients from the world's rarest sustainable farms.</p>
                 </div>
-            </section>
+            </div>
+
+            {/* الكارت الثاني: Craft */}
+            <div className="pillar-card p-right">
+                <LuxeMedia 
+                    src="/YOUR_IMAGE_URL_FOR_CRAFT.png" 
+                    className="pillar-bg-media" 
+                    alt="Craft Background"
+                />
+                <span className="pillar-number">02</span>
+                <div className="pillar-content">
+                    <div className="pillar-icon-line"></div>
+                    <h3>Craft</h3>
+                    <p>Designing each bottle as a sculptural piece of art.</p>
+                </div>
+            </div>
+
+            {/* الكارت الثالث: Conscious */}
+            <div className="pillar-card p-center">
+                <LuxeMedia 
+                    src="/YOUR_IMAGE_URL_FOR_CONSCIOUS.png" 
+                    className="pillar-bg-media" 
+                    alt="Conscious Background"
+                />
+                <span className="pillar-number">03</span>
+                <div className="pillar-content">
+                    <div className="pillar-icon-line"></div>
+                    <h3>Conscious</h3>
+                    <p>Luxury that respects the Earth and ethical transparency.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
             {/* 4. تجربة الطقوس: المنتج الطافي */}
             <section className="about-ritual-3d">
@@ -277,7 +315,7 @@ if (!mainRef.current || !pathRef.current) return;
                     <p>A moment dedicated solely to you.</p>
                 </div>
                 <div className="canvas-3d-wrapper">
-                    <img src="/YOUR_3D_ASSET_PNG.png" alt="3D Product" className="floating-3d-asset" />
+                    <LuxeMedia src="/YOUR_3D_ASSET_PNG.png" alt="3D Product" className="floating-3d-asset" />
                     <div className="shadow-overlay"></div>
                 </div>
             </section>
@@ -289,19 +327,19 @@ if (!mainRef.current || !pathRef.current) return;
                 </div>
       <div className="macro-gallery-loop" ref={loopRef}>
     {/* المجموعة الأولى */}
-    <div className="ingredient-card"><img src="/INGREDIENT_1.png" alt="Rare Flower" /></div>
-    <div className="ingredient-card"><img src="/INGREDIENT_2.png" alt="Pure Oil" /></div>
-    <div className="ingredient-card"><img src="/INGREDIENT_3.png" alt="Essence Wood" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_1.png" alt="Rare Flower" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_2.png" alt="Pure Oil" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_3.png" alt="Essence Wood" /></div>
     
     {/* المجموعة الثانية (التكرار الأول) */}
-    <div className="ingredient-card"><img src="/INGREDIENT_1.png" alt="Rare Flower" /></div>
-    <div className="ingredient-card"><img src="/INGREDIENT_2.png" alt="Pure Oil" /></div>
-    <div className="ingredient-card"><img src="/INGREDIENT_3.png" alt="Essence Wood" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_1.png" alt="Rare Flower" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_2.png" alt="Pure Oil" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_3.png" alt="Essence Wood" /></div>
 
     {/* المجموعة الثالثة (التكرار الثاني - لضمان عدم وجود سير فارغ) */}
-    <div className="ingredient-card"><img src="/INGREDIENT_1.png" alt="Rare Flower" /></div>
-    <div className="ingredient-card"><img src="/INGREDIENT_2.png" alt="Pure Oil" /></div>
-    <div className="ingredient-card"><img src="/INGREDIENT_3.png" alt="Essence Wood" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_1.png" alt="Rare Flower" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_2.png" alt="Pure Oil" /></div>
+    <div className="ingredient-card"><LuxeMedia src="/INGREDIENT_3.png" alt="Essence Wood" /></div>
 </div>
             </section>
 

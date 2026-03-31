@@ -4,7 +4,7 @@ import { discoverMoreProducts } from './Discover-More';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import LuxeMedia from './LuxeMedia';
 // تفعيل إضافة ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,7 +90,7 @@ useLayoutEffect(() => {
                         className={`collection-card card-${category.id}`}
                     >
                         <div className="card-image-wrapper">
-                            <img src={category.theme.img22} alt={category.id} />
+                            <LuxeMedia src={category.theme.img22} alt={category.id} />
                             <div className="card-overlay">
                                 <div className='card-overlay-text'>
                                     <h2 style={{ color: category.theme.dark3 }}>

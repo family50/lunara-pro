@@ -321,57 +321,108 @@
 
 
 
-
-
-
-
-
-
-/* --- 3. Pillars Section --- */
+/* --- 3. Pillars Section (The Path of Lunara) --- */
 .about-pillars-section {
-    padding: 250px 0; /* زيادة المسافة الرأسية */
-    
+    padding: 250px 0;
+    background-color: var(--bg-cream);
     position: relative;
-    overflow: hidden; /* ضروري لأن الخط المتموج قد يخرج عن الحدود */
-   
+    overflow: hidden;
+}
+
+/* الخط الذهبي المتموج */
+.pillars-path-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.path-line {
+    fill: none;
+    stroke: var(--primary-gold);
+    stroke-width: 1.5;
+    stroke-dasharray: 10, 5;
 }
 
 .pillars-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 120px; /* مسافة كبيرة بين كل قيمة والثانية */
-    
-    
-}
-
-.pillar-card {
-    position: relative;
-    max-width: 500px;
-    display: flex;
-    align-items: flex-start;
-    gap: 30px;
-}
-
-
-
-/* الرقم الخلفي الضخم */
-.pillar-number {
-    position: absolute;
-    top: -40px;
-    left: -60px;
-    font-family: var(--font-primary);
-    font-size: 10rem;
-    color: var(--primary-gold);
-    opacity: 0.05; /* خافت جداً كأنه محفور في الحائط */
-    z-index: 1;
-}
-
-.pillar-content {
+    gap: 180px;
     position: relative;
     z-index: 2;
 }
 
-/* خط ذهبي رفيع بجانب العنوان */
+/* --- Pillar Card: Textured Glass Monolith --- */
+.pillar-card {
+    position: relative;
+    max-width: 550px;
+    padding: 80px 60px;
+    background: rgba(255, 255, 255, 0.6); /* خلفية بيضاء أوضح للقاعدة */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 40px 100px rgba(140, 109, 57, 0.08);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+}
+
+/* إلغاء الـ ::before القديم لاستبداله بـ LuxeMedia */
+.pillar-card::before {
+    display: none !important;
+}
+
+/* ضبط الـ LuxeMedia لتعمل كخلفية */
+.pillar-bg-media {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important;
+    object-fit: cover;
+    opacity: 0.5; /* الشفافية الأصلية التي طلبتها */
+    filter: none;
+    transition: opacity 0.6s ease, transform 1.2s ease !important;
+}
+
+/* الهوفر على الكارت والميديا */
+.pillar-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--primary-gold);
+}
+
+.pillar-card:hover .pillar-bg-media {
+    opacity: 0.8; /* تصبح واضحة عند الهوفر */
+    transform: scale(1.08);
+}
+
+/* --- Content Styling --- */
+.pillar-content {
+    position: relative;
+    z-index: 3;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.pillar-number {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 8rem;
+    font-family: var(--font-primary);
+    color: var(--primary-gold);
+    opacity: 0.08;
+    z-index: 2;
+    user-select: none;
+}
+
 .pillar-icon-line {
     width: 40px;
     height: 1px;
@@ -381,7 +432,7 @@
 }
 
 .pillar-card:hover .pillar-icon-line {
-    width: 80px; /* حركة بسيطة عند الهافر */
+    width: 80px;
 }
 
 .pillar-card h3 {
@@ -400,175 +451,16 @@
     font-weight: 400;
 }
 
-/* --- 3. The Pillars: Textured Glass Monoliths --- */
-
-.pillar-card {
-    position: relative;
-    max-width: 550px;
-    padding: 60px 50px;
-    background: rgba(255, 255, 255, 0.2); /* خلفية بيضاء شفافة جداً */
-    backdrop-filter: blur(15px); /* تأثير الـ Frosted */
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 30px 60px rgba(140, 109, 57, 0.04);
-    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-    z-index: 2;
-    overflow: hidden; /* ضروري لقص الصورة الزائدة عن اللوحة */
-}
-
-
-/* --- حركة الهافر للزجاج والصورة --- */
-.pillar-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid var(--primary-gold);
-}
-
-.pillar-card:hover::before {
-    opacity: 0.05; /* تزداد وضوحاً قليلاً عند الهافر لتعزيز التفاعل */
-    transform: scale(1.1); /* تكبير الصورة ببطء لتعطي عمقاً (Parallax effect) */
-}
-
-/* --- تخصيص الصور الثلاثة (يمكنك استبدال الروابط) --- */
-.pillar-card.p-left::before {
-    background-image: url('/YOUR_IMAGE_URL_FOR_PURITY.png'); /* مثال: صورة ماكرو لقطرة زيت ذهبية */
-}
-
-.pillar-card.p-right::before {
-    background-image: url('/YOUR_IMAGE_URL_FOR_CRAFT.png'); /* مثال: صورة فنية لزجاجة منحوتة خافتة */
-}
-
-.pillar-card.p-center::before {
-    background-image: url('/YOUR_IMAGE_URL_FOR_CONSCIOUS.png'); /* مثال: صورة لغصن نبات نادر كريمي */
-}
-
-/* --- تنسيق المحتوى ليكون فوق الصورة بوضوح --- */
-.pillar-content {
-    position: relative;
-    z-index: 3; /* فوق صورة الخلفية الخافتة */
-}
-
-.pillar-number {
-    position: absolute;
-    top: -20px;
-    right: 20px;
-    font-size: 8rem;
-    font-family: var(--font-primary);
-    color: var(--primary-gold);
-    opacity: 0.08;
-    z-index: 2;
-    user-select: none;
-}
-/* --- 3. Pillars Section (The Path of Lunara) --- */
-.about-pillars-section {
-    padding: 250px 0; /* زيادة المسافة الرأسية */
-    background-color: var(--bg-cream);
-    position: relative;
-    overflow: hidden; /* ضروري لأن الخط المتموج قد يخرج عن الحدود */
-}
-
-/* --- الخط الترابي المتموج (The Earthy Silk Path) --- */
-/* هذا العنصر هو الذي ستقوم بتحريكه بواسطة GSAP (DrawSVG plugin) */
-.pillars-path-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.3; /* شفافية الخط ليكون "ترابياً" ناعماً */
-}
-
-.path-line {
-    fill: none;
-    stroke: var(--primary-gold); /* أو لون كريمي ترابي غامق */
-    stroke-width: 1.5;
-    stroke-dasharray: 10, 5; /* خط منقط بسيط ليعطي إيحاء بالخياطة أو المسار */
-    /* التموج سيتم رسمه في الـ SVG بالأسفل */
-}
-
-.pillars-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 180px; /* فجوة رأسية ضخمة */
-    position: relative;
-    z-index: 2;
-}
-
-.pillar-card {
-    position: relative;
-    max-width: 550px;
-    padding: 80px 60px; /* زيادة المساحة قليلاً للصور الواضحة */
-    background: rgba(255, 255, 255, 0.6); /* خلفية بيضاء أوضح لتعمل كقاعدة للصورة */
-    backdrop-filter: blur(12px); /* تقليل البلور قليلاً لزيادة حدة ما خلف الزجاج */
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 40px 100px rgba(140, 109, 57, 0.08);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-}
-
-/* --- الصور الخلفية: واضحة وبدون فلاتر --- */
-.pillar-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    
-    /* رفع الشفافية لدرجة عالية */
-    opacity: 0.5; 
-    
-    /* إلغاء الفلاتر تماماً لرؤية الألوان الأصلية (الذهبي والكريمي) */
-    filter: none; 
-    
-    transition: opacity 0.6s ease, transform 1.2s ease;
-    z-index: 1;
-}
-
-/* عند مرور الماوس: الصورة تصبح كاملة الوضوح تقريباً */
-.pillar-card:hover::before {
-    opacity: 0.8;
-    transform: scale(1.08); /* حركة زووم هادئة */
-}
-
-/* --- طبقة حماية النص (Gradient Overlay) --- */
-/* بما أن الصورة أصبحت واضحة، نحتاج لظل خفيف جداً خلف النص لضمان المقروئية */
-.pillar-content {
-    position: relative;
-    z-index: 3;
-    /* إضافة ظل ناعم جداً خلف النصوص ليبرز فوق الصورة */
-    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
-}
-
-.pillar-card:hover::before {
-    opacity: 0.4; /* وضوح عالٍ عند التفاعل */
-    transform: scale(1.05);
-}
-
-/* --- التباعد العرضي الأقصى --- */
+/* التباعد العرضي */
 .p-left { align-self: flex-start; margin-left: 2%; }
 .p-right { align-self: flex-end; margin-right: 2%; }
 .p-center { align-self: center; margin-top: -50px; }
 
-/* --- تأثير GSAP التحضيري --- */
-/* هذه الكلاسات ستتحكم بها لاحقاً */
+/* GSAP */
 .pillar-card.is-hidden {
     opacity: 0;
     transform: translateY(50px);
 }
-
-
-.path-container {
-    width: 100%;
-    height: 1800px;
-    /* بنرسم المسار هنا كأنه قناع أو مسار حركة */
-    offset-path: path("M720,0 C720,300 200,400 200,700 C200,1000 1240,1100 1240,1400 C1240,1600 720,1700 720,1800");
-}
-
-
-
-
 
 
 

@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './home.css';
 import Footer from './footer';
-
+import LuxeMedia from './LuxeMedia';
 gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
@@ -195,7 +195,7 @@ statementTl
             {/* القسم الأول: HERO SECTION */}
             <section className="hero-section">
                 <div className="hero-overlay"></div>
-                <video 
+                <LuxeMedia 
                     src="/02177426498432500000000000000000000ffffc0a8981cd0b0f4.mp4" 
                     autoPlay loop muted playsInline
                     className="hero-video-bg" 
@@ -233,7 +233,7 @@ statementTl
                 <div className="essence-grid-container">
                     <div className="essence-visual-part">
                         <div className="product-wrapper">
-                            <img src="/product-placeholder.png" alt="Lunara Product" className="floating-bottle-premium" />
+                            <LuxeMedia src="/product-placeholder.png" alt="Lunara Product" className="floating-bottle-premium" />
                             <div className="dynamic-shadow-premium"></div>
                         </div>
                     </div>
@@ -262,16 +262,16 @@ statementTl
                     <div className="ritual-blur-overlay right"></div>
                     <div className="ritual-loop-track">
                         <div className="ritual-grid">
-                            <div className="ritual-item item-1"><img src="/ritual-1.png" alt="1" /></div>
-                            <div className="ritual-item item-2"><img src="/ritual-2.png" alt="2" /></div>
-                            <div className="ritual-item item-3"><img src="/ritual-3.png" alt="3" /></div>
-                            <div className="ritual-item item-4"><img src="/ritual-4.png" alt="4" /></div>
+                            <div className="ritual-item item-1"><LuxeMedia src="/ritual-1.png" alt="1" /></div>
+                            <div className="ritual-item item-2"><LuxeMedia src="/ritual-2.png" alt="2" /></div>
+                            <div className="ritual-item item-3"><LuxeMedia src="/ritual-3.png" alt="3" /></div>
+                            <div className="ritual-item item-4"><LuxeMedia src="/ritual-4.png" alt="4" /></div>
                         </div>
                         <div className="ritual-grid">
-                            <div className="ritual-item item-1"><img src="/ritual-1.png" alt="1" /></div>
-                            <div className="ritual-item item-2"><img src="/ritual-2.png" alt="2" /></div>
-                            <div className="ritual-item item-3"><img src="/ritual-3.png" alt="3" /></div>
-                            <div className="ritual-item item-4"><img src="/ritual-4.png" alt="4" /></div>
+                            <div className="ritual-item item-1"><LuxeMedia src="/ritual-1.png" alt="1" /></div>
+                            <div className="ritual-item item-2"><LuxeMedia src="/ritual-2.png" alt="2" /></div>
+                            <div className="ritual-item item-3"><LuxeMedia src="/ritual-3.png" alt="3" /></div>
+                            <div className="ritual-item item-4"><LuxeMedia src="/ritual-4.png" alt="4" /></div>
                         </div>
                     </div>
                 </div>

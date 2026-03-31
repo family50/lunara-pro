@@ -4,7 +4,7 @@ import { discoverMoreProducts } from './Discover-More';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./one-products.css";
-
+import LuxeMedia from './LuxeMedia';
 // تسجيل ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
@@ -372,7 +372,7 @@ useLayoutEffect(() => {
 
             <div className="product-main-wrapper">
                 <div className="product-image-section">
-                    <img src={product.image} alt={product.name} className="main-product-img" />
+                    <LuxeMedia src={product.image} alt={product.name} className="main-product-img" />
                 </div>
                 
                 <div className="product-info-section" style={{ color: textColor }}>

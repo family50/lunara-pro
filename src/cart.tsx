@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import './cart.css';
 import { Link } from 'react-router-dom';
+import LuxeMedia from './LuxeMedia';
 interface CartItem {
     id: number;
     section: string;
@@ -67,7 +68,7 @@ function Cart() {
     </button>
 
     <div className="cart-img-box">
-        <img src={item.image} alt={item.name} />
+        <LuxeMedia src={item.image} alt={item.name} />
     </div>
 
     <div className="cart-content-wrapper">

@@ -1,7 +1,7 @@
 import  { useRef, useState } from "react";
 import "./payment.css";
 import { gsap } from "gsap";
-
+import LuxeMedia from './LuxeMedia';
 // تعريف واجهة بيانات المنتج في السلة (متوافقة مع OneProduct)
 interface CartItem {
     name: string;
@@ -129,7 +129,7 @@ const [cartItems, setCartItems] = useState<CartItem[]>(() => {
 
                             <div className="payment-wing">
                                 <div className="card-display-area">
-                                     <img src="/created.png" alt="Card" className="master-card-img" />
+                                     <LuxeMedia src="/created.png" alt="Card" className="master-card-img" />
                                 </div>
                                 <div className="input-cluster">
                                     <input type="text" className={`gold-input ${errors["0000 0000 0000 0000"] ? "input-error" : ""}`} placeholder="0000 0000 0000 0000" />
@@ -157,7 +157,7 @@ const [cartItems, setCartItems] = useState<CartItem[]>(() => {
                             <p className="gold-sub-text">Your collection awaits its first masterpiece.</p>
                             
                             <div className="empty-card-visual">
-                                <img src="/created.png" alt="Empty Vault" className="floating-empty-card" />
+                                <LuxeMedia src="/created.png" alt="Empty Vault" className="floating-empty-card" />
                                 <div className="card-shadow-pulse"></div>
                             </div>
                         </div>

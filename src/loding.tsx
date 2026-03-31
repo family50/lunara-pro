@@ -1,36 +1,29 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { ALL_PRELOAD_IMAGES, preloadAssets } from './assetsData';
 
 const Loading = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // 1. تحديد الحد الأدنى للوقت (ثانيتين) لإعطاء هيبة للبراند
-    const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 2000));
+    // تشغيل التحميل المسبق فوراً
+    preloadAssets(ALL_PRELOAD_IMAGES);
 
-    // 2. تحديد وقت انتهاء تحميل كافة عناصر الصفحة (صور، فيديوهات، ملفات)
+    const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 2500)); // زدت الوقت قليلاً للهيبة
     const pageLoaded = new Promise((resolve) => {
-      if (document.readyState === 'complete') {
-        resolve(true);
-      } else {
-        window.addEventListener('load', resolve);
-      }
+      if (document.readyState === 'complete') resolve(true);
+      else window.addEventListener('load', resolve);
     });
 
-    // 3. الانتظار حتى يتحقق الشرطين معاً
     Promise.all([minDisplayTime, pageLoaded]).then(() => {
-      // إضافة ثانية إضافية "نعومة" بعد التحميل الفعلي
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 500); 
+      setTimeout(() => setIsVisible(false), 500);
     });
-
-    return () => window.removeEventListener('load', () => {});
   }, []);
 
   if (!isVisible) return null;
 
   return (
-    <>
+    <div className="luxury-loader-overlay">
+   
       <style>
         {`
           /* --- 1. الحاوية الخارجية (الخلفية الملكية والزجاج) --- */
@@ -193,7 +186,7 @@ const Loading = () => {
           </div>
         </div>
       </div>
-    </>
+   </div>
   );
 };
 

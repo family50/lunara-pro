@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { Suspense, lazy } from "react"; 
+import { Suspense, lazy, useEffect, useState } from "react"; 
 
-// --- التعديل الجوهري هنا: استخدام lazy loading للصفحات ---
+import AssetManager from "./AssetManager";
+
+// Lazy Pages
 const Home = lazy(() => import("./home"));
 const Collections = lazy(() => import("./collections"));
 const About = lazy(() => import("./about"));
@@ -10,7 +12,7 @@ const AllProducts = lazy(() => import("./all-products"));
 const OneProduct = lazy(() => import("./one-products"));
 const Payment = lazy(() => import("./payment"));
 
-// المكونات الثابتة تظل كما هي
+// Components
 import Header from "./header";
 import ScrollToTop from "./scroll";
 import Mouse from "./mouse";
@@ -18,20 +20,41 @@ import Loading from "./loding";
 
 function AppContent() {
   const location = useLocation();
+  const [isEntryLoading, setIsEntryLoading] = useState(true);
+
   const hideHeaderPaths = ["/all-products", "/one-product", "/payment"];
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
 
+  useEffect(() => {
+    // 1. الأولوية القصوى للصفحة الحالية (سواء كانت هوم، كولكشن، أو غيرها)
+    AssetManager.loadRouteAssets(location.pathname);
+
+    // 2. تحميل باقي الموقع في الخلفية
+    AssetManager.loadEverythingElse();
+
+    // 3. إدارة شاشة اللودر
+    const handleInitialLoad = () => {
+      const timer = setTimeout(() => {
+        setIsEntryLoading(false);
+      }, 3000); 
+      return () => clearTimeout(timer);
+    };
+
+    if (document.readyState === 'complete') {
+      handleInitialLoad();
+    } else {
+      window.addEventListener('load', handleInitialLoad);
+      return () => window.removeEventListener('load', handleInitialLoad);
+    }
+  }, [location.pathname]); // الكود ده هيتنفذ فوراً مع كل تغيير مسار
+
   return (
     <>
-      {/* هذا اللودر سيظهر "فقط" عند أول دخول للموقع (Refresh) بسبب الـ Timeout داخله */}
-      <Loading />
-      
+      {isEntryLoading && <Loading />}
       <ScrollToTop />
       <Mouse />
       {!shouldHideHeader && <Header />}
       
-      {/* الـ Suspense سيراقب الآن تحميل الصفحات "الكسولة" (lazy) */}
-      {/* إذا كان النت سريعاً، لن يلحق اللودر بالظهور، أما إذا كان بطيئاً فسيظهر فوراً */}
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />

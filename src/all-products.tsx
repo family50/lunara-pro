@@ -4,7 +4,7 @@ import "./all-products.css";
 import { useLayoutEffect, useRef, useState, useEffect, useMemo, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import LuxeMedia from './LuxeMedia';
 import Footer2 from "./fotter2";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -244,7 +244,7 @@ useLayoutEffect(() => {
 
             {sectionData && (
                 <div className="img-container">
-                    <img ref={imgRef} src={sectionData.theme.img22} alt="hero" className="hero-image" />
+                    <LuxeMedia ref={imgRef} src={sectionData.theme.img22} alt="hero" className="hero-image" />
                     <div className="hero-text-wrapper">
                         {lines.map((line, index) => (
                             <h1 key={index} ref={(el) => { textRef.current[index] = el; }} className="hero-text" style={{ color: sectionData.theme.dark3, fontFamily: "'Cinzel', serif" }}>
@@ -261,7 +261,7 @@ useLayoutEffect(() => {
                     <div className="best-seller-content" ref={cardsContainerRef}>
                         {[...(sectionData?.products?.slice(0, 3) || []), ...(sectionData?.products?.slice(0, 3) || [])].map((product, index) => (
                             <div key={index} className="product-card-simple">
-                                <div className="product-img-box"><img src={product.image} alt={product.name} /></div>
+                                <div className="product-img-box"><LuxeMedia src={product.image} alt={product.name} /></div>
                                 <div className="product-info-simple" style={{ color: thumbColor }}>
                                     <h3 className="p-name">{product.name}</h3>
                                     <div className="p-rating">
@@ -320,7 +320,7 @@ useLayoutEffect(() => {
                        onClick={() => handleProductClick(product.id)}
                     >
                         <div className="p-card-img-wrapper">
-                            <img src={product.image} alt={product.name} className="p-card-img" />
+                            <LuxeMedia src={product.image} alt={product.name} className="p-card-img" />
                             <div className="explore-btn3" style={{ backgroundColor: thumbColor, color: bgColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 Explore
                             </div>

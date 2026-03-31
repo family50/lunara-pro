@@ -88,3 +88,46 @@ body {
       background-color: var(--bg-cream); /* الخلفية ستكون الذهبي الملكي */
     color: var(--primary-gold); 
 }
+
+
+
+
+@keyframes fadeIn {
+
+ from {
+
+ opacity: 0;
+
+ }
+
+ to {
+
+ /* السطر ده معناه: ارجع للقيمة اللي الـ CSS بتاعك محددها أصلاً */
+
+ opacity: inherit;
+
+ }
+
+}
+
+  
+
+.fade-in-image {
+
+/* بنشغل الأنميشن مرة واحدة وبنخليه يقف عند آخر فريم */
+
+animation: fadeIn 0.8s ease-in-out forwards;
+
+}
+
+  
+
+.hidden-media {
+
+ opacity: 0 !important;
+
+ visibility: hidden;
+
+}
+
+
