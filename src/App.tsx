@@ -39,7 +39,7 @@ function AppContent() {
         // 2. بمجرد ما الأساسيات تخلص، بنقفل اللودر بس بنسيب وقت بسيط للـ Transition
         setTimeout(() => {
           setIsEntryLoading(false);
-        }, 500); // نص ثانية إضافية عشان النعومة
+        }, 2500); // نص ثانية إضافية عشان النعومة
         
         // 3. تحميل باقي الموقع "في صمت" في الخلفية
         AssetManager.loadEverythingElse();

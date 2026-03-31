@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ALL_PRELOAD_IMAGES, preloadAssets } from './assetsData';
-
+import LuxeMedia from './LuxeMedia';
 const Loading = () => {
   const [isVisible, setIsVisible] = useState(true);
 
@@ -171,7 +171,7 @@ const Loading = () => {
         <div className="glass-aura"></div>
         
         <div className="loader-content">
-          <img 
+          <LuxeMedia 
             src="/Lunara-Pro-Luxury-Logo.png" /* رابط اللوجو الخاص بك */
             alt="Lunara Logo" 
             className="loader-logo" 
