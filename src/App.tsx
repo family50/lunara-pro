@@ -26,53 +26,65 @@ function AppContent() {
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
 
   useEffect(() => {
-    // 1. تشغيل تحميل ملفات الصفحة الحالية
-    // بنخلي الميثود دي ترجع Promise عشان نعرف امتى خلصت
+    // حل مشكلة الـ Synchronous setState:
+    // نضع التحديث داخل requestAnimationFrame عشان يشتغل بعد انتهاء دورة الرندر الحالية
+    requestAnimationFrame(() => {
+      setIsEntryLoading(true);
+    });
+
     const loadAssets = async () => {
-      // إجبار اللودر يظهر عند بداية أي تحميل لو محتاج، 
-      // بس غالباً إنت عايزه في أول دخلة للموقع بس (Entry)
-      
       try {
-        // انتظر تحميل الصور والفيديوهات الأساسية للمسار الحالي
+        const startTime = Date.now();
+
+        // انتظر تحميل الميديا الأساسية للمسار الحالي
         await AssetManager.loadRouteAssets(location.pathname);
         
-        // 2. بمجرد ما الأساسيات تخلص، بنقفل اللودر بس بنسيب وقت بسيط للـ Transition
+        // حل مشكلة unused-vars:
+        // نستخدم elapsedTime فعلياً لحساب الفارق الزمني المطلوب
+        const elapsedTime = Date.now() - startTime;
+        const minimumWait = 2000; // مدة اللودر الإجمالية لضمان الفخامة
+
+        // لو التحميل أخد وقت أقل من الـ minimumWait، بنطرح الوقت اللي فات عشان نكمل المدة
+        const remainingWait = Math.max(0, minimumWait - elapsedTime);
+
         setTimeout(() => {
           setIsEntryLoading(false);
-        }, 2500); // نص ثانية إضافية عشان النعومة
-        
-        // 3. تحميل باقي الموقع "في صمت" في الخلفية
-        AssetManager.loadEverythingElse();
-        
+          
+          // تحميل باقي الموقع في الخلفية
+          AssetManager.loadEverythingElse();
+        }, remainingWait);
+
       } catch (error) {
-        console.error("Assets failed to load", error);
-        // حتى لو حصل خطأ، اقفل اللودر عشان المستخدم ميعلقش
-        setIsEntryLoading(false);
+        console.error("Critical Assets failed to load", error);
+        setTimeout(() => setIsEntryLoading(false), 1000);
       }
     };
 
     loadAssets();
-
   }, [location.pathname]);
 
   return (
     <>
-      {/* اللودر هيختفي فقط لما setIsEntryLoading تبقى false */}
+      {/* اللودر يظهر طالما الحالة true */}
       {isEntryLoading && <Loading />}
+      
       <ScrollToTop />
       <Mouse />
       {!shouldHideHeader && <Header />}
       
       <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/collections" element={<Collections />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/all-products" element={<AllProducts />} />
-          <Route path="/one-product" element={<OneProduct />} />
-          <Route path="/payment" element={<Payment />} />
-        </Routes>
+        {/* visibility: hidden تضمن أن الصفحة موجودة في الخلفية وتحمل ولكنها غير مرئية */}
+        <div style={{ visibility: isEntryLoading ? 'hidden' : 'visible' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/collections" element={<Collections />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/all-products" element={<AllProducts />} />
+            <Route path="/one-product" element={<OneProduct />} />
+            <Route path="/payment" element={<Payment />} />
+          </Routes>
+        </div>
       </Suspense>
     </>
   );
