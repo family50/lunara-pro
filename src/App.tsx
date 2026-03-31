@@ -26,30 +26,38 @@ function AppContent() {
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
 
   useEffect(() => {
-    // 1. الأولوية القصوى للصفحة الحالية (سواء كانت هوم، كولكشن، أو غيرها)
-    AssetManager.loadRouteAssets(location.pathname);
-
-    // 2. تحميل باقي الموقع في الخلفية
-    AssetManager.loadEverythingElse();
-
-    // 3. إدارة شاشة اللودر
-    const handleInitialLoad = () => {
-      const timer = setTimeout(() => {
+    // 1. تشغيل تحميل ملفات الصفحة الحالية
+    // بنخلي الميثود دي ترجع Promise عشان نعرف امتى خلصت
+    const loadAssets = async () => {
+      // إجبار اللودر يظهر عند بداية أي تحميل لو محتاج، 
+      // بس غالباً إنت عايزه في أول دخلة للموقع بس (Entry)
+      
+      try {
+        // انتظر تحميل الصور والفيديوهات الأساسية للمسار الحالي
+        await AssetManager.loadRouteAssets(location.pathname);
+        
+        // 2. بمجرد ما الأساسيات تخلص، بنقفل اللودر بس بنسيب وقت بسيط للـ Transition
+        setTimeout(() => {
+          setIsEntryLoading(false);
+        }, 500); // نص ثانية إضافية عشان النعومة
+        
+        // 3. تحميل باقي الموقع "في صمت" في الخلفية
+        AssetManager.loadEverythingElse();
+        
+      } catch (error) {
+        console.error("Assets failed to load", error);
+        // حتى لو حصل خطأ، اقفل اللودر عشان المستخدم ميعلقش
         setIsEntryLoading(false);
-      }, 3000); 
-      return () => clearTimeout(timer);
+      }
     };
 
-    if (document.readyState === 'complete') {
-      handleInitialLoad();
-    } else {
-      window.addEventListener('load', handleInitialLoad);
-      return () => window.removeEventListener('load', handleInitialLoad);
-    }
-  }, [location.pathname]); // الكود ده هيتنفذ فوراً مع كل تغيير مسار
+    loadAssets();
+
+  }, [location.pathname]);
 
   return (
     <>
+      {/* اللودر هيختفي فقط لما setIsEntryLoading تبقى false */}
       {isEntryLoading && <Loading />}
       <ScrollToTop />
       <Mouse />
