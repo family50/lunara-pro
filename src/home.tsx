@@ -18,12 +18,13 @@ const Home: React.FC = () => {
                 opacity: 0,
                 duration: 1.5,
                 stagger: 0.3,
-                ease: "power3.out"
+                ease: "power3.out",
+                delay: 0.5, // التأخير الأساسي
             });
 
             gsap.fromTo(".hero-video-bg", 
                 { opacity: 0, scale: 1.1 }, 
-                { opacity: 1, scale: 1, duration: 2.5, ease: "power2.out" }
+                { opacity: 1, scale: 1, duration: 2.5, ease: "power2.out", delay: 0.5 }
             );
 
             gsap.fromTo(".hero-geometric-shape", 
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
                     scale: 1, 
                     filter: "blur(2px)", 
                     duration: 0.8, 
-                    delay: 0.2, 
+                    delay: 0.7, 
                     stagger: 0.4, 
                     ease: "power3.out" 
                 }
@@ -41,7 +42,8 @@ const Home: React.FC = () => {
 
             gsap.fromTo(".hero-side-line", 
                 { scaleY: 0, opacity: 0 }, 
-                { scaleY: 1, opacity: 1, duration: 2.5, delay: 0.5, ease: "expo.out", stagger: 0.3 }
+                { scaleY: 1,
+                     opacity: 1, duration: 2.5, delay: 1, ease: "expo.out", stagger: 0.3  }
             );
 
             // أنميشن الطفو المستمر للأشكال

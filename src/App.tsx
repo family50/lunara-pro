@@ -41,7 +41,7 @@ function AppContent() {
         await AssetManager.loadRouteAssets(location.pathname);
         
         const elapsedTime = Date.now() - startTime;
-        const minimumWait = 2000; // ثانيتين لضمان ظهور اللوجو بفخامة
+        const minimumWait = 500; // ثانيتين لضمان ظهور اللوجو بفخامة
 
         const remainingWait = Math.max(0, minimumWait - elapsedTime);
 
