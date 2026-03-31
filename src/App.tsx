@@ -81,7 +81,7 @@ function AppContent() {
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/all-products" element={<AllProducts />} />
-            <Route path="/product/:section/:id" element={<OneProduct />} />
+            <Route path="/one-product" element={<OneProduct />} />
             <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>

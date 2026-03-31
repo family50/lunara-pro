@@ -7,7 +7,7 @@ import "./one-products.css";
 import LuxeMedia from './LuxeMedia';
 // تسجيل ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
-import { useParams } from "react-router-dom";
+
 // --- 1. تعريف الأنواع بناءً على قاعدة بياناتك ---
 interface Review {
     user: string;
@@ -78,19 +78,19 @@ interface CartData {
 }
 
 function OneProduct() {
+ 
     const location = useLocation();
-    const { section: urlSection, id: urlId } = useParams(); // استخراج البيانات من الرابط
+
     const mainContainerRef = useRef<HTMLDivElement>(null);
 
-    // --- التعديل الجوهري هنا ---
-    // إذا كان الـ state موجود (انتقال داخلي) نستخدمه، وإذا اختفى (Refresh) نستخدم الـ params من الرابط
-    const sectionKey = (location.state?.sectionKey || urlSection) as keyof DiscoverMoreProductsData;
-    const productId = location.state?.productId ? Number(location.state.productId) : Number(urlId);
+    // استخراج المفاتيح والـ ID مع تحديد النوع بدقة
+    const productId = location.state?.productId as number;
+    const sectionKey = location.state?.sectionKey as keyof DiscoverMoreProductsData;
     
+    // استخراج القسم والمنتج مع Casting آمن لبيانات الاستيراد
     const data = discoverMoreProducts as unknown as DiscoverMoreProductsData;
     const section = sectionKey ? data[sectionKey] : undefined;
     const product = section?.products.find((p) => p.id === productId);
-    // ----------------------------
 
     const [quantity, setQuantity] = useState(1);
 
