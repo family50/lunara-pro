@@ -4,7 +4,7 @@ import "./all-products.css";
 import { useLayoutEffect, useRef, useState, useEffect, useMemo, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { NavLink } from "react-router-dom";
+
 import Footer2 from "./fotter2";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -270,9 +270,9 @@ useLayoutEffect(() => {
                                     </div>
                                     <p className="p-price">${product.price}</p>
                                 </div>
-                                <NavLink 
-                                    to="/one-product" 
-                                    state={{ productId: product.id, sectionKey: sectionKey }}
+                                <button 
+                                     onClick={() => handleProductClick(product.id)}
+                                   
                                     className="explore-btn2" 
                                     style={{ 
                                         backgroundColor: thumbColor, 
@@ -285,7 +285,7 @@ useLayoutEffect(() => {
                                     }}
                                 >
                                     Explore More
-                                </NavLink>
+                                </button>
                             </div>
                         ))}
                     </div>
